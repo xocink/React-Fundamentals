@@ -1,8 +1,11 @@
 .course-card__wrapper {
-    border: #61a6a0 1px solid;
+  height: 10rem;
+  border: #61a6a0 1px solid;
   border-radius: 5px;
   padding: 1rem;
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
   .course-card {
     display: flex;
     justify-content: space-between;
@@ -12,11 +15,15 @@
       
       .course-card__title {
         font-size: 2rem;
+        margin-bottom: 1rem;
       }
     }
 
     &__info-block {
       width: 25%;
+      p {
+        margin-bottom: .5rem;
+      }
     }
   }
 }

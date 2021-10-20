@@ -19,15 +19,15 @@ const CourseCard = ({
         </div>
         <div className="course-card__info-block">
           <p>
-            Author:
+            Author:&nbsp;&nbsp;
             {getFormatedAuthor(authors)}
           </p>
           <p>
-            Duration:
+            Duration:&nbsp;&nbsp;
             {getFormatedDuration(duration)}
           </p>
           <p>
-            Created:
+            Created:&nbsp;&nbsp;
             {getFormatedDate(creationDate)}
           </p>
           <Button btnText="Show Course" />

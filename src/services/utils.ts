@@ -8,7 +8,7 @@ export const getFormatedDuration = (time : number) : string => {
   const hours = (time - minutes) / 60;
   const formatedHours = hours < 10 ? `0${hours}` : `${hours}`;
   const formatedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-  return `${formatedHours}:${formatedMinutes}`;
+  return `${formatedHours}:${formatedMinutes} hours`;
 };
 
 // eslint-disable-next-line max-len
