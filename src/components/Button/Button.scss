@@ -1,0 +1,18 @@
+.btn{
+  display: inline-block;
+  vertical-align: top;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #70ada7;
+  border-radius: 5px;
+  border: 1px bisque solid;
+  text-decoration: none;
+  background-color: #d6f5dd;
+  cursor: pointer;
+  transition: all 0.22s;
+  &:hover {
+    background-color: #b9eac4;
+    color: #61a6a0;
+  }
+}

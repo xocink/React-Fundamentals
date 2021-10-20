@@ -1,0 +1,22 @@
+.course-card__wrapper {
+    border: #61a6a0 1px solid;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  .course-card {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    &__description-block {
+      width: 65%;
+      
+      .course-card__title {
+        font-size: 2rem;
+      }
+    }
+
+    &__info-block {
+      width: 25%;
+    }
+  }
+}
