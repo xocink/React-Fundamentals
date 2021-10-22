@@ -18,4 +18,18 @@ export const getFormatedAuthor = (authorsId : string[]) :string => {
   return authorArr.join(', ');
 };
 
+export const getDateString = () => {
+  const curDate = new Date();
+  const month = curDate.getMonth();
+  const day = curDate.getDate();
+  const year = curDate.getFullYear();
+  return `${month + 1}/${day}/${year}`;
+};
+
+export const getNumDuration = (dur : string) : number => {
+  const [hours, minutes] : string[] = dur.split(' ')[0].split(':');
+  console.log(dur);
+  return (+hours * 60) + +minutes;
+};
+
 export default {};

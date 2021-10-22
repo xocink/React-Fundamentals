@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+// eslint-disable-next-line import/no-cycle
+import { CoursesContext } from '../../App';
 import { mockedCoursesList } from '../../tempData/mockedData';
 import CourseCard from '../CourseCard/course-card';
 import './courses.scss';
@@ -8,7 +10,8 @@ import Button from '../Button/Button';
 import { getFilteredCourses } from '../../services/search-service';
 import { ICourseModel } from '../../models/course-model';
 
-const Courses = () : JSX.Element => {
+const Courses = (): JSX.Element => {
+  const controlObj = useContext(CoursesContext);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [shownCourses, setShownCourses] = useState<ICourseModel[]>(mockedCoursesList);
   const [courses, setCourses] = useState<ICourseModel[]>(mockedCoursesList);
@@ -29,7 +32,17 @@ const Courses = () : JSX.Element => {
         </Link>
       </div>
       <div className="courses">
-        {shownCourses.map((item) => <CourseCard key={`${item.id}`} id={item.id} title={item.title} description={item.description} creationDate={item.creationDate} duration={item.duration} authors={item.authors} />)}
+        {controlObj.actualCourses.map((item) => (
+          <CourseCard
+            key={`${item.id}`}
+            id={item.id}
+            title={item.title}
+            description={item.description}
+            creationDate={item.creationDate}
+            duration={item.duration}
+            authors={item.authors}
+          />
+        ))}
       </div>
     </div>
   );

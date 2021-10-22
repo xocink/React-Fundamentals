@@ -10,9 +10,10 @@
     display: flex;
     justify-content: space-between;
     text-align: left;
+    width: 100%;
     &__description-block {
       width: 65%;
-      
+      min-width: 65%;
       .course-card__title {
         font-size: 2rem;
         margin-bottom: 1rem;
