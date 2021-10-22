@@ -8,7 +8,7 @@ import './course-card.scss';
 
 const CourseCard = ({
   id, creationDate, description, duration, title, authors,
-} : ICourseModel) => {
+} : ICourseModel) : JSX.Element => {
   const test = 1;
   return (
     <div className="course-card__wrapper">

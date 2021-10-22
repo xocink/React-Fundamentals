@@ -1,10 +1,9 @@
 import React from 'react';
 import './Header.scss';
 import Button from '../Button/Button';
-import { timeConvert } from '../../services/timeConvert';
 
-const Header = () => {
-  const time = timeConvert('22');
+const Header = () : JSX.Element => {
+  const time = 1;
   return (
     <header className="header">
       <div className="header__content-wrapper">

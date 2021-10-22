@@ -1,5 +1,4 @@
 import { mockedAuthorsList } from '../tempData/mockedData';
-import { IAuthorModel } from '../models/author-list-model';
 
 export const getFormatedDate = (date : string) : string => date.split('/').join('.');
 
