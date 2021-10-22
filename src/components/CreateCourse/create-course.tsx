@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '../Button/Button';
 import SearchInput from '../Input/search-input';
-import { getDateString, getFormatedDuration, getNumDuration } from '../../services/utils';
+import { getDateString, getFormatedDuration } from '../../services/utils';
 import DeleteButton from '../Button/delete-button';
 import { mockedAuthorsList } from '../../tempData/mockedData';
 import { IAuthorModel } from '../../models/author-list-model';
@@ -21,7 +21,7 @@ const CreateCourse = (): JSX.Element => {
   const [addingAuthor, setAddingAuthor] = useState<IAuthorModel>({ name: '', id: '' });
   const [addedAuthor, setAddedAuthor] = useState<IAuthorModel[]>([]);
   const [courseAuthors, setCourseAuthors] = useState<IAuthorModel[]>([]);
-  const [defaultAuthors, setDefaultAuthors] = useState<IAuthorModel[]>(mockedAuthorsList);
+  const [defaultAuthors] = useState<IAuthorModel[]>(mockedAuthorsList);
   const history = useHistory();
 
   const handleAddingAuthor = (): void => {
@@ -49,7 +49,7 @@ const CreateCourse = (): JSX.Element => {
 
   const handleCreateCourseBtn = () => {
     if (duration && courseAuthors.length !== 0 && title && courseDescription) {
-      const courseObj : ICourseModel = {
+      const courseObj: ICourseModel = {
         id: uuidv4(),
         title,
         description: courseDescription,
@@ -58,11 +58,10 @@ const CreateCourse = (): JSX.Element => {
 
         authors: courseAuthors.map((elem) => elem.id),
       };
-      console.log(courseObj);
       controlObj.changeFunc([...controlObj.actualCourses, courseObj]);
       history.push('/');
     } else {
-      alert('fill all fields');
+      alert('fill all fields'); // alert placed here according to task requirements
     }
   };
 
@@ -109,7 +108,7 @@ const CreateCourse = (): JSX.Element => {
               <div className="course-authors" key={elem.id}>
                 {elem.name}
                 {' '}
-&nbsp;
+                &nbsp;
                 :
                 <Button btnText="Add author" action={() => addAuthorToCourse(elem)} />
               </div>
@@ -118,7 +117,7 @@ const CreateCourse = (): JSX.Element => {
               <div className="course-authors" key={elem.id}>
                 {elem.name}
                 {' '}
-&nbsp;
+                &nbsp;
                 :
                 <Button btnText="Add author" action={() => addAuthorToCourse(elem)} />
               </div>

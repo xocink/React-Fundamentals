@@ -14,7 +14,7 @@ const Courses = (): JSX.Element => {
   const controlObj = useContext(CoursesContext);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [shownCourses, setShownCourses] = useState<ICourseModel[]>(mockedCoursesList);
-  const [courses, setCourses] = useState<ICourseModel[]>(mockedCoursesList);
+  const [courses] = useState<ICourseModel[]>(mockedCoursesList);
 
   useEffect(() => {
     setShownCourses(getFilteredCourses(searchQuery, courses));
