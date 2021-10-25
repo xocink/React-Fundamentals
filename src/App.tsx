@@ -4,9 +4,9 @@ import React, {
 import './App.scss';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Courses from './components/Courses/courses';
-import CreateCourse from './components/CreateCourse/create-course';
-import { mockedCoursesList } from './tempData/mockedData';
+import Courses from './components/Courses/Courses';
+import CreateCourse from './components/CreateCourse/Create-course';
+import { mockedCoursesList } from './mockedData/mockedData';
 import { ICourseModel } from './models/course-model';
 
 interface IContextObj {

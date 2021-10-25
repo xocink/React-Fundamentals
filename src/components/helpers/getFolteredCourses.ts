@@ -1,4 +1,4 @@
-import { ICourseModel } from '../models/course-model';
+import { ICourseModel } from '../../models/course-model';
 
 export const getFilteredCourses = (searchQuery : string,
   courses : ICourseModel[]): ICourseModel[] => {

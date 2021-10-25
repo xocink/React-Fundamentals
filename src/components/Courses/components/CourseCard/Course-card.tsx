@@ -1,10 +1,11 @@
 import React from 'react';
-import { ICourseModel } from '../../models/course-model';
-import Button from '../Button/Button';
-import {
-  getFormatedAuthor, getFormatedDate, getFormatedDuration,
-} from '../../services/utils';
-import './course-card.scss';
+import { ICourseModel } from '../../../../models/course-model';
+import Button from '../../../common/Button/Button';
+
+import './Course-card.scss';
+import { getFormattedDuration } from '../../../helpers/formatCourseDuration';
+import { getFormattedDate } from '../../../helpers/formateCourseDate';
+import { getFormattedAuthor } from '../../../helpers/getFormatedAuthor';
 
 const CourseCard = ({
   id, creationDate, description, duration, title, authors,
@@ -18,15 +19,15 @@ const CourseCard = ({
       <div className="course-card__info-block">
         <p>
           Author:&nbsp;&nbsp;
-          {getFormatedAuthor(authors)}
+          {getFormattedAuthor(authors)}
         </p>
         <p>
           Duration:&nbsp;&nbsp;
-          {getFormatedDuration(duration)}
+          {getFormattedDuration(duration)}
         </p>
         <p>
           Created:&nbsp;&nbsp;
-          {getFormatedDate(creationDate)}
+          {getFormattedDate(creationDate)}
         </p>
         <Button btnText="Show Course" />
       </div>

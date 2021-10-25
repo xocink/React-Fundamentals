@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-cycle
 import { CoursesContext } from '../../App';
-import { mockedCoursesList } from '../../tempData/mockedData';
-import CourseCard from '../CourseCard/course-card';
-import './courses.scss';
-import SearchInput from '../Input/search-input';
-import Button from '../Button/Button';
-import { getFilteredCourses } from '../../services/search-service';
+import { mockedCoursesList } from '../../mockedData/mockedData';
+import CourseCard from './components/CourseCard/Course-card';
+import './Courses.scss';
+import SearchInput from '../common/Input/Search-input';
+import Button from '../common/Button/Button';
+import { getFilteredCourses } from '../helpers/getFolteredCourses';
 import { ICourseModel } from '../../models/course-model';
 
 const Courses = (): JSX.Element => {

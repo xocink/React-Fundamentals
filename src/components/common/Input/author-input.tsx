@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import './search-input.scss';
+import './Search-input.scss';
 import { v4 as uuidv4 } from 'uuid';
-import { ISearchInputProps } from '../../models/search-input-props';
-import { IAuthorModel } from '../../models/author-list-model';
+import { ISearchInputProps } from '../../../models/search-input-props';
+import { IAuthorModel } from '../../../models/author-list-model';
 
 const AuthorInput = ({ secondAction } : ISearchInputProps) : JSX.Element => {
   const authorInput = useRef<HTMLInputElement | null>(null);

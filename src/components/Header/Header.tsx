@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.scss';
-import Button from '../Button/Button';
+import Button from '../common/Button/Button';
 
 const Header = () : JSX.Element => (
   <header className="header">
