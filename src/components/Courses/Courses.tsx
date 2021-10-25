@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-cycle
 import { CoursesContext } from '../../App';
 import { mockedCoursesList } from '../../mockedData/mockedData';
-import CourseCard from './components/CourseCard/Course-card';
+import CourseCard from './components/CourseCard/CourseCard';
 import './Courses.scss';
-import SearchInput from '../common/Input/Search-input';
+import SearchInput from '../common/Input/SearchInput';
 import Button from '../common/Button/Button';
 import { getFilteredCourses } from '../helpers/getFolteredCourses';
 import { ICourseModel } from '../../models/course-model';
@@ -24,10 +24,10 @@ const Courses = (): JSX.Element => {
     <div className="courses__wrapper">
       <div className="courses__menu">
         <div className="search__wrapper">
-          <SearchInput query={searchQuery} action={setSearchQuery} />
+          {/* <SearchInput query={searchQuery} action={setSearchQuery} /> */}
           <Button btnText="Search" />
         </div>
-        <Link to="create">
+        <Link to="courses/add">
           <Button btnText="Add new course" />
         </Link>
       </div>

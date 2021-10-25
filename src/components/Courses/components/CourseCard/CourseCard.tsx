@@ -2,7 +2,7 @@ import React from 'react';
 import { ICourseModel } from '../../../../models/course-model';
 import Button from '../../../common/Button/Button';
 
-import './Course-card.scss';
+import './CourseCard.scss';
 import { getFormattedDuration } from '../../../helpers/formatCourseDuration';
 import { getFormattedDate } from '../../../helpers/formateCourseDate';
 import { getFormattedAuthor } from '../../../helpers/getFormatedAuthor';

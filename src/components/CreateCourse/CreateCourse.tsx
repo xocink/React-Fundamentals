@@ -2,19 +2,20 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '../common/Button/Button';
-import SearchInput from '../common/Input/Search-input';
+import SearchInput from '../common/Input/SearchInput';
 
-import DeleteButton from '../common/Button/delete-button';
 import { mockedAuthorsList } from '../../mockedData/mockedData';
 import { IAuthorModel } from '../../models/author-list-model';
 import AuthorInput from '../common/Input/author-input';
-import './Create-course.scss';
+import './CreateCourse.scss';
 // eslint-disable-next-line import/no-cycle
 import { CoursesContext } from '../../App';
 import { ICourseModel } from '../../models/course-model';
 import { getFormattedDuration } from '../helpers/formatCourseDuration';
 import { getDateString } from '../helpers/dateGenerator';
 import Author from './components/Author/Author';
+import Title from './components/Title/Title';
+import Duration from './components/Duration/Duration';
 
 const CreateCourse = (): JSX.Element => {
   const controlObj = useContext(CoursesContext);
@@ -24,7 +25,7 @@ const CreateCourse = (): JSX.Element => {
   const [addingAuthor, setAddingAuthor] = useState<IAuthorModel>({ name: '', id: '' });
   const [addedAuthor, setAddedAuthor] = useState<IAuthorModel[]>([]);
   const [courseAuthors, setCourseAuthors] = useState<IAuthorModel[]>([]);
-  const [defaultAuthors] = useState<IAuthorModel[]>(mockedAuthorsList);
+  const defaultAuthors: IAuthorModel[] = mockedAuthorsList;
   const history = useHistory();
 
   const handleAddingAuthor = (): void => {
@@ -35,10 +36,22 @@ const CreateCourse = (): JSX.Element => {
     tempArr.push(addingAuthor);
     setAddedAuthor(() => [...tempArr]);
   };
-  // event : MouseEventHandler<HTMLButtonElement>
+
+  // const handleAuthorNameAdding = (authorName : string) => {
+  //   setAddingAuthor(authorName);
+  // };
+
   const deleteAuthor = (author: IAuthorModel): void => {
     const tempArr = courseAuthors.slice();
     setCourseAuthors(() => [...tempArr.filter((item) => item.name !== author.name)]);
+  };
+
+  const handleTitleChange = (newTitle: string) => {
+    setTitle(newTitle);
+  };
+
+  const handleDurationChange = (newDuration: string) => {
+    setDuration(newDuration);
   };
 
   const addAuthorToCourse = (author: IAuthorModel) => {
@@ -73,13 +86,7 @@ const CreateCourse = (): JSX.Element => {
       <div className="create-course">
         <div className="create-course__upper">
           <div className="create-course__title-block">
-            <div className="create-course__header">
-              <h3 className="create-course__title">
-                Title :&nbsp;
-                {title}
-              </h3>
-              <SearchInput action={setTitle} />
-            </div>
+            <Title title={title} action={handleTitleChange} />
 
             <Button action={handleCreateCourseBtn} btnText="Create Course" />
 
@@ -101,7 +108,7 @@ const CreateCourse = (): JSX.Element => {
               Add authors
             </h3>
             <div>
-              <AuthorInput secondAction={setAddingAuthor} />
+              {/* <AuthorInput secondAction={setAddingAuthor} /> */}
               <Button btnText="Add author" action={handleAddingAuthor} />
             </div>
           </div>
@@ -116,18 +123,19 @@ const CreateCourse = (): JSX.Element => {
 
           </div>
           <div className="create-course__duration-block authors-block__item">
-            <div>
-              <h3 className="course-card__duration">
-                Duration: &nbsp;
-                {getFormattedDuration(+duration)}
-              </h3>
-              <SearchInput action={setDuration} />
-            </div>
+            <Duration newDuration={duration} onDurationChange={handleDurationChange} />
           </div>
           <div className="create-course__course-authors authors-block__item">
             <h3>Course authors</h3>
             {courseAuthors.length === 0 ? (<p>No authors added</p>)
-              : courseAuthors.map((elem) => <Author key={elem.id} author={elem} btnLabel="Delete author" action={deleteAuthor} />)}
+              : courseAuthors.map((elem) => (
+                <Author
+                  key={elem.id}
+                  author={elem}
+                  btnLabel="Delete author"
+                  action={deleteAuthor}
+                />
+              ))}
           </div>
         </div>
       </div>

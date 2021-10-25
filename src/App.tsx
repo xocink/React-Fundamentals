@@ -1,13 +1,17 @@
 import React, {
   useState,
 } from 'react';
+
 import './App.scss';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter, Route, Switch, Link, Redirect,
+} from 'react-router-dom';
 import Header from './components/Header/Header';
 import Courses from './components/Courses/Courses';
-import CreateCourse from './components/CreateCourse/Create-course';
+import CreateCourse from './components/CreateCourse/CreateCourse';
 import { mockedCoursesList } from './mockedData/mockedData';
 import { ICourseModel } from './models/course-model';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 interface IContextObj {
   actualCourses: ICourseModel[]
@@ -33,8 +37,12 @@ const App = (): JSX.Element => {
         <div className="container">
           <Header />
           <Switch>
-            <Route path="/" exact component={Courses} />
-            <Route path="/create" exact component={CreateCourse} />
+            <Route exact path="/">
+              <Redirect to="courses" />
+            </Route>
+            <Route path="/courses" exact component={Courses} />
+            <Route path="/courses/add" exact component={CreateCourse} />
+            <Route path="*" component={ErrorPage} />
           </Switch>
         </div>
       </BrowserRouter>
