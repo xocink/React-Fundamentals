@@ -4,13 +4,13 @@ import React, {
 
 import './App.scss';
 import {
-  BrowserRouter, Route, Switch, Link, Redirect,
+  BrowserRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Courses from './components/Courses/Courses';
 import CreateCourse from './components/CreateCourse/CreateCourse';
 import { mockedCoursesList } from './mockedData/mockedData';
-import { ICourseModel } from './models/course-model';
+import { ICourseModel } from './components/CreateCourse/components/interfaces/course-interface';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 
 interface IContextObj {

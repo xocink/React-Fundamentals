@@ -2,44 +2,45 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '../common/Button/Button';
-import SearchInput from '../common/Input/SearchInput';
-
-import { mockedAuthorsList } from '../../mockedData/mockedData';
-import { IAuthorModel } from '../../models/author-list-model';
-import AuthorInput from '../common/Input/author-input';
+import { IAuthorModel } from './components/interfaces/author-list-interface';
 import './CreateCourse.scss';
 // eslint-disable-next-line import/no-cycle
 import { CoursesContext } from '../../App';
-import { ICourseModel } from '../../models/course-model';
-import { getFormattedDuration } from '../helpers/formatCourseDuration';
+import { ICourseModel } from './components/interfaces/course-interface';
 import { getDateString } from '../helpers/dateGenerator';
-import Author from './components/Author/Author';
 import Title from './components/Title/Title';
 import Duration from './components/Duration/Duration';
+import CreateAuthor from './components/CreateAuthor/CreateAuthor';
+import Description from './components/Description/Description';
+import AuthorsList from './components/AuthorsList/AuthorsList';
+import CourseAuthors from './components/CourseAuthors/CourseAuthors';
 
 const CreateCourse = (): JSX.Element => {
   const controlObj = useContext(CoursesContext);
   const [title, setTitle] = useState<string>('');
   const [duration, setDuration] = useState<string>('');
   const [courseDescription, setCourseDescription] = useState<string>('');
-  const [addingAuthor, setAddingAuthor] = useState<IAuthorModel>({ name: '', id: '' });
+  const [testAuthor, setTestAuthor] = useState<string>('');
   const [addedAuthor, setAddedAuthor] = useState<IAuthorModel[]>([]);
   const [courseAuthors, setCourseAuthors] = useState<IAuthorModel[]>([]);
-  const defaultAuthors: IAuthorModel[] = mockedAuthorsList;
   const history = useHistory();
+
+  const testHandle = (authorName: string): void => {
+    setTestAuthor(authorName);
+  };
 
   const handleAddingAuthor = (): void => {
     const tempArr = addedAuthor.slice();
-    if (tempArr.includes(addingAuthor)) {
+    const author: IAuthorModel = {
+      name: testAuthor,
+      id: uuidv4(),
+    };
+    if (tempArr.some((value) => value.name === author.name)) {
       return;
     }
-    tempArr.push(addingAuthor);
+    tempArr.push(author);
     setAddedAuthor(() => [...tempArr]);
   };
-
-  // const handleAuthorNameAdding = (authorName : string) => {
-  //   setAddingAuthor(authorName);
-  // };
 
   const deleteAuthor = (author: IAuthorModel): void => {
     const tempArr = courseAuthors.slice();
@@ -52,6 +53,10 @@ const CreateCourse = (): JSX.Element => {
 
   const handleDurationChange = (newDuration: string) => {
     setDuration(newDuration);
+  };
+
+  const handleDescriptionChange = (value: string) => {
+    setCourseDescription(value);
   };
 
   const addAuthorToCourse = (author: IAuthorModel) => {
@@ -83,62 +88,37 @@ const CreateCourse = (): JSX.Element => {
 
   return (
     <div className="create-course__wrapper">
-      <div className="create-course">
+      <form className="create-course">
         <div className="create-course__upper">
           <div className="create-course__title-block">
             <Title title={title} action={handleTitleChange} />
-
             <Button action={handleCreateCourseBtn} btnText="Create Course" />
-
           </div>
-          <div className="create-course__description">
-            <h3 className="course-description">Description</h3>
-            <textarea
-              value={courseDescription}
-              onChange={(event) => setCourseDescription(event.target.value)}
-              id="course-description"
-            />
-          </div>
-
+          <Description value={courseDescription} changeHandler={handleDescriptionChange} />
         </div>
 
         <div className="create-course__authors-block">
-          <div className="create-course__add-authors-block authors-block__item">
-            <h3 className="create-course__add-authors-title">
-              Add authors
-            </h3>
-            <div>
-              {/* <AuthorInput secondAction={setAddingAuthor} /> */}
-              <Button btnText="Add author" action={handleAddingAuthor} />
-            </div>
-          </div>
-          <div className="create-course__authors authors-block__item">
-            <h3>Authors</h3>
-            {defaultAuthors.map((elem) => (
-              <Author key={elem.id} author={elem} btnLabel="Add author" action={addAuthorToCourse} />
-            ))}
-            {addedAuthor.map((elem) => (
-              <Author key={elem.id} author={elem} btnLabel="Add author" action={addAuthorToCourse} />
-            ))}
+          <CreateAuthor
+            authorName={testAuthor}
+            changeAction={testHandle}
+            btnAction={handleAddingAuthor}
+          />
+          <AuthorsList
+            addedToCourseAuthors={addedAuthor}
+            action={addAuthorToCourse}
+          />
 
-          </div>
-          <div className="create-course__duration-block authors-block__item">
-            <Duration newDuration={duration} onDurationChange={handleDurationChange} />
-          </div>
-          <div className="create-course__course-authors authors-block__item">
-            <h3>Course authors</h3>
-            {courseAuthors.length === 0 ? (<p>No authors added</p>)
-              : courseAuthors.map((elem) => (
-                <Author
-                  key={elem.id}
-                  author={elem}
-                  btnLabel="Delete author"
-                  action={deleteAuthor}
-                />
-              ))}
-          </div>
+          <Duration
+            newDuration={duration}
+            onDurationChange={handleDurationChange}
+          />
+
+          <CourseAuthors
+            addedToCourseAuthors={courseAuthors}
+            action={deleteAuthor}
+          />
         </div>
-      </div>
+      </form>
     </div>
   );
 };

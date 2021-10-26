@@ -12,13 +12,16 @@ const Duration = ({ newDuration, onDurationChange }:IDurationProps) : JSX.Elemen
     onDurationChange(value);
   };
   return (
-    <div>
-      <h3 className="course-card__duration">
-        Duration: &nbsp;
-        {getFormattedDuration(+newDuration)}
-      </h3>
-      <SearchInput type="number" onChangeAction={handleChange} />
+    <div className="create-course__duration-block authors-block__item">
+      <div>
+        <h3 className="course-card__duration">
+          Duration: &nbsp;
+          {getFormattedDuration(+newDuration)}
+        </h3>
+        <SearchInput type="number" onChangeAction={handleChange} />
+      </div>
     </div>
+
   );
 };
 

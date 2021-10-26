@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './SearchInput.scss';
-import { ISearchInputProps } from '../../../models/search-input-props';
+import { ISearchInputProps } from './interface/search-input-props';
 
 const SearchInput = ({ onChangeAction, type }: ISearchInputProps): JSX.Element => {
   const searchInput = useRef<HTMLInputElement | null>(null);

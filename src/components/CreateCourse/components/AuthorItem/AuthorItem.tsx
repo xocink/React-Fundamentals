@@ -1,14 +1,14 @@
 import React from 'react';
-import { IAuthorModel } from '../../../../models/author-list-model';
+import { IAuthorModel } from '../interfaces/author-list-interface';
 import Button from '../../../common/Button/Button';
 
-interface IAuthorProps {
+interface IAuthorItemProps {
   author: IAuthorModel
   action: (elem : IAuthorModel) => void
   btnLabel: string
 }
 
-const Author = ({ author, action, btnLabel }: IAuthorProps): JSX.Element => {
+const AuthorItem = ({ author, action, btnLabel }: IAuthorItemProps): JSX.Element => {
   const handleButtonClick = () => {
     action(author);
   };
@@ -21,4 +21,4 @@ const Author = ({ author, action, btnLabel }: IAuthorProps): JSX.Element => {
   );
 };
 
-export default Author;
+export default AuthorItem;

@@ -1,5 +1,5 @@
-import { IAuthorModel } from '../models/author-list-model';
-import { ICourseModel } from '../models/course-model';
+import { IAuthorModel } from '../components/CreateCourse/components/interfaces/author-list-interface';
+import { ICourseModel } from '../components/CreateCourse/components/interfaces/course-interface';
 
 export const mockedCoursesList : ICourseModel[] = [
   {

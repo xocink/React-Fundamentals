@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICourseModel } from '../../../../models/course-model';
+import { ICourseModel } from '../../../CreateCourse/components/interfaces/course-interface';
 import Button from '../../../common/Button/Button';
 
 import './CourseCard.scss';
@@ -8,8 +8,8 @@ import { getFormattedDate } from '../../../helpers/formateCourseDate';
 import { getFormattedAuthor } from '../../../helpers/getFormatedAuthor';
 
 const CourseCard = ({
-  id, creationDate, description, duration, title, authors,
-} : ICourseModel) : JSX.Element => (
+  creationDate, description, duration, title, authors,
+}: ICourseModel): JSX.Element => (
   <div className="course-card__wrapper">
     <div className="course-card">
       <div className="course-card__description-block">
@@ -29,7 +29,12 @@ const CourseCard = ({
           Created:&nbsp;&nbsp;
           {getFormattedDate(creationDate)}
         </p>
-        <Button btnText="Show Course" />
+        <Button
+          btnText="Show Course"
+          action={() => {
+
+          }}
+        />
       </div>
     </div>
   </div>

@@ -8,42 +8,43 @@ import './Courses.scss';
 import SearchInput from '../common/Input/SearchInput';
 import Button from '../common/Button/Button';
 import { getFilteredCourses } from '../helpers/getFolteredCourses';
-import { ICourseModel } from '../../models/course-model';
+import { ICourseModel } from '../CreateCourse/components/interfaces/course-interface';
 
 const Courses = (): JSX.Element => {
   const controlObj = useContext(CoursesContext);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [shownCourses, setShownCourses] = useState<ICourseModel[]>(mockedCoursesList);
-  const [courses] = useState<ICourseModel[]>(mockedCoursesList);
 
   useEffect(() => {
-    setShownCourses(getFilteredCourses(searchQuery, courses));
+    setShownCourses(getFilteredCourses(searchQuery, controlObj.actualCourses));
   }, [searchQuery]);
+
+  const onQueryChange = (query : string) => {
+    setSearchQuery(query);
+  };
 
   return (
     <div className="courses__wrapper">
       <div className="courses__menu">
         <div className="search__wrapper">
-          {/* <SearchInput query={searchQuery} action={setSearchQuery} /> */}
+          <SearchInput type="text" onChangeAction={onQueryChange} />
           <Button btnText="Search" />
         </div>
         <Link to="courses/add">
           <Button btnText="Add new course" />
         </Link>
       </div>
-      <div className="courses">
-        {controlObj.actualCourses.map((item) => (
-          <CourseCard
-            key={`${item.id}`}
-            id={item.id}
-            title={item.title}
-            description={item.description}
-            creationDate={item.creationDate}
-            duration={item.duration}
-            authors={item.authors}
-          />
-        ))}
-      </div>
+      {shownCourses.map((item) => (
+        <CourseCard
+          key={`${item.id}`}
+          id={item.id}
+          title={item.title}
+          description={item.description}
+          creationDate={item.creationDate}
+          duration={item.duration}
+          authors={item.authors}
+        />
+      ))}
     </div>
   );
 };
