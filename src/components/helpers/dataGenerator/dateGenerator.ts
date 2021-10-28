@@ -5,4 +5,3 @@ export const getDateString = () : string => {
   const year = curDate.getFullYear();
   return `${month + 1}/${day}/${year}`;
 };
-export default {};

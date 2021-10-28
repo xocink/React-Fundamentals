@@ -1,5 +1,5 @@
 import React from 'react';
-import { getFormattedDuration } from '../../../helpers/formatCourseDuration';
+import { getFormattedDuration } from '../../../helpers/formatCourseDuration/formatCourseDuration';
 import SearchInput from '../../../common/Input/SearchInput';
 
 interface IDurationProps {

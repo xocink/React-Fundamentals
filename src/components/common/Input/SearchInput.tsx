@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import './SearchInput.scss';
-import { ISearchInputProps } from './interface/search-input-props';
+import { ISearchInputProps } from './interface';
 
-const SearchInput = ({ onChangeAction, type }: ISearchInputProps): JSX.Element => {
+const SearchInput = ({ onChangeAction, type, id }: ISearchInputProps): JSX.Element => {
   const searchInput = useRef<HTMLInputElement | null>(null);
 
   const changeHandler = () => {
@@ -14,7 +14,7 @@ const SearchInput = ({ onChangeAction, type }: ISearchInputProps): JSX.Element =
   };
 
   return (
-    <input onChange={changeHandler} ref={searchInput} className="search-input" type={type} placeholder="search" />
+    <input onChange={changeHandler} ref={searchInput} className="search-input" type={type} id={!id ? '' : id} placeholder="search" />
   );
 };
 

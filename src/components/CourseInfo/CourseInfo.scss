@@ -1,0 +1,23 @@
+.course-info {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2.5rem;
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__description {
+    width: 52%;
+
+  }
+  &__bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    p {
+      margin-bottom: 0.7rem;
+    }
+  }
+}

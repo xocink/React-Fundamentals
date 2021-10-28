@@ -24,6 +24,6 @@
     ],
     "rules": {
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-        "import/no-cycle" : "off" //temporary solution
+        "import/prefer-default-export" : "off"
     }
 }
