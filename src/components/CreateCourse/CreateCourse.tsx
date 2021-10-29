@@ -1,5 +1,5 @@
 import React, {
-  FormEvent, useContext, useEffect, useState,
+  FormEvent, useEffect, useState,
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -14,6 +14,7 @@ import CreateAuthor from './components/CreateAuthor/CreateAuthor';
 import Description from './components/Description/Description';
 import AuthorsList from './components/AuthorsList/AuthorsList';
 import CourseAuthors from './components/CourseAuthors/CourseAuthors';
+import { numberPositiveOnlyReg } from '../helpers/consts';
 
 interface ICreateCourseProps {
   courses: ICourseModel[]
@@ -61,8 +62,13 @@ const CreateCourse = ({ changeCoursesList, courses }: ICreateCourseProps): JSX.E
     setTitle(newTitle);
   };
 
-  const handleDurationChange = (newDuration: string) => {
-    setDuration(newDuration);
+  const handleDurationChange = (newDuration: string, ref : HTMLInputElement | undefined) => {
+    if (numberPositiveOnlyReg.test(newDuration) || newDuration === '') {
+      setDuration(newDuration);
+      ref?.classList.remove('error');
+    } else {
+      ref?.classList.add('error');
+    }
   };
 
   const handleDescriptionChange = (value: string) => {
@@ -102,7 +108,7 @@ const CreateCourse = ({ changeCoursesList, courses }: ICreateCourseProps): JSX.E
       <form className="create-course" onSubmit={handleCreateCourseBtn}>
         <div className="create-course__upper">
           <div className="create-course__title-block">
-            <Title title={title} action={handleTitleChange} />
+            <Title action={handleTitleChange} />
             <Button btnText="Create Course" isSubmit />
           </div>
           <Description value={courseDescription} changeHandler={handleDescriptionChange} />

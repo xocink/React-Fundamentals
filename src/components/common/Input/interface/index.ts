@@ -1,5 +1,5 @@
 export interface ISearchInputProps {
-  onChangeAction: (newTitle : string) => void
+  onChangeAction: (newTitle : string, ref? : HTMLInputElement) => void
   type : string
   id?: string
 }

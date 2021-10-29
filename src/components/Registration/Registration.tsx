@@ -1,12 +1,11 @@
 import React, { FormEvent, useEffect, useState } from 'react';
-import { log } from 'util';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import SearchInput from '../common/Input/SearchInput';
 import Button from '../common/Button/Button';
 import { IUser } from './interfaces/user';
-
 import { IRegistrationResponse } from './interfaces/registrationResponse';
-import { registerUser } from './helpers/registerUser/registerUser';
+import './Registration.scss';
+import { emailReg, nameReg, passwordReg } from '../helpers/consts';
 
 const Registration = (): JSX.Element => {
   const [name, setName] = useState<string>('');
@@ -15,16 +14,31 @@ const Registration = (): JSX.Element => {
   const [registerObj, setRegisterObj] = useState<IRegistrationResponse>();
   const history = useHistory();
 
-  const handleEmailChange = (value: string) => {
-    setEmail(value);
+  const handleEmailChange = (value: string, ref: HTMLInputElement | undefined) => {
+    if (emailReg.test(value) || ref?.value === '') {
+      setEmail(value);
+      ref?.classList.remove('error');
+    } else {
+      ref?.classList.add('error');
+    }
   };
 
-  const handlePasswordChange = (value: string) => {
-    setPassword(value);
+  const handlePasswordChange = (value: string, ref: HTMLInputElement | undefined) => {
+    if (passwordReg.test(value) || ref?.value === '') {
+      setPassword(value);
+      ref?.classList.remove('error');
+    } else {
+      ref?.classList.add('error');
+    }
   };
 
-  const handleNameChange = (value: string) => {
-    setName(value);
+  const handleNameChange = (value: string, ref: HTMLInputElement | undefined) => {
+    if (nameReg.test(value) || value === '') {
+      setName(value);
+      ref?.classList.remove('error');
+    } else {
+      ref?.classList.add('error');
+    }
   };
 
   useEffect(() => {
@@ -49,26 +63,35 @@ const Registration = (): JSX.Element => {
         },
       }).then((response) => response.json())
         .then((res) => setRegisterObj(res))
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     };
-    console.log(registerObj);
     getResponse();
   };
 
   return (
-    <div className="login">
-      <h3>Login</h3>
-      <form onSubmit={handleSubmit} className="1">
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="name">Name</label>
-        <SearchInput type="text" id="name" onChangeAction={handleNameChange} />
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="email">Email</label>
-        <SearchInput type="text" id="email" onChangeAction={handleEmailChange} />
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="password">Password</label>
-        <SearchInput type="text" id="password" onChangeAction={handlePasswordChange} />
+    <div className="registration">
+      <h3 className="registration__title">Registration</h3>
+      <form onSubmit={handleSubmit} className="registration__form">
+        <div className="registration__name">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label htmlFor="name">Name</label>
+          <SearchInput type="text" id="name" onChangeAction={handleNameChange} />
+        </div>
+        <div className="registration__email">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label htmlFor="email">Email</label>
+          <SearchInput type="text" id="email" onChangeAction={handleEmailChange} />
+        </div>
+        <div className="registration__password">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label htmlFor="password">Password</label>
+          <SearchInput type="text" id="password" onChangeAction={handlePasswordChange} />
+        </div>
         <Button btnText="Registration" isSubmit />
+        <p>
+          Already registered?
+          <Link to="/login"> Login</Link>
+        </p>
       </form>
     </div>
   );

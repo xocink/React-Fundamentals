@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import './SearchInput.scss';
 import { ISearchInputProps } from './interface';
+import './SearchInput.scss';
 
 const SearchInput = ({ onChangeAction, type, id }: ISearchInputProps): JSX.Element => {
   const searchInput = useRef<HTMLInputElement | null>(null);
@@ -8,7 +8,7 @@ const SearchInput = ({ onChangeAction, type, id }: ISearchInputProps): JSX.Eleme
   const changeHandler = () => {
     if (searchInput && searchInput.current) {
       if (onChangeAction) {
-        onChangeAction(searchInput.current?.value);
+        onChangeAction(searchInput.current?.value, searchInput.current);
       }
     }
   };

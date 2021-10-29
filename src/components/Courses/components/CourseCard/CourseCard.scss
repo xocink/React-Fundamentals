@@ -8,10 +8,12 @@
   border: #61a6a0 1px solid;
   border-radius: 5px;
   padding: 1rem;
-  margin-bottom: 1.5rem;
+
   box-sizing: border-box;
   align-items: center;
-
+  margin-bottom: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   &__description-block {
     width: 65%;
     min-width: 65%;

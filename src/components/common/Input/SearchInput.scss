@@ -4,5 +4,11 @@
   max-width: 15rem;
   width: 15rem;
   font-size: 1rem;
+
   border-radius: 5px;
+
+  .error {
+    background-color: rgba(231, 105, 105, 0.5);
+  }
 }
+

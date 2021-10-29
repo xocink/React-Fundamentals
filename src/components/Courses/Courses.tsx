@@ -7,9 +7,8 @@ import CourseCard from './components/CourseCard/CourseCard';
 import './Courses.scss';
 import SearchInput from '../common/Input/SearchInput';
 import Button from '../common/Button/Button';
-import { getFilteredCourses } from '../helpers/getFilteredCourses/getFilteredCourses';
+import { getFilteredCourses, loginCheck } from '../helpers';
 import { ICourseModel } from '../CreateCourse/components/interfaces/course-interface';
-import { loginCheck } from '../helpers';
 
 interface ICoursesProps {
   courses : ICourseModel[]
@@ -43,17 +42,20 @@ const Courses = ({ courses } : ICoursesProps): JSX.Element => {
           <Button btnText="Add new course" />
         </Link>
       </div>
-      {shownCourses.map((item) => (
-        <CourseCard
-          key={`${item.id}`}
-          id={item.id}
-          title={item.title}
-          description={item.description}
-          creationDate={item.creationDate}
-          duration={item.duration}
-          authors={item.authors}
-        />
-      ))}
+      <div className="courses__cards">
+        {shownCourses.map((item) => (
+          <CourseCard
+            key={`${item.id}`}
+            id={item.id}
+            title={item.title}
+            description={item.description}
+            creationDate={item.creationDate}
+            duration={item.duration}
+            authors={item.authors}
+          />
+        ))}
+      </div>
+
     </div>
   );
 };
