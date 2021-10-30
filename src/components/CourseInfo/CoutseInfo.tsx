@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { getFormattedAuthor } from '../helpers/getFormatedAuthor/getFormatedAuthor';
-import { getFormattedDuration } from '../helpers/formatCourseDuration/formatCourseDuration';
-import { getFormattedDate } from '../helpers/formateCourseDate/formateCourseDate';
 import Button from '../common/Button/Button';
-import './CourseInfo.scss';
 import { ICourseModel } from '../CreateCourse/components/interfaces/course-interface';
-import { getCourseById } from '../helpers/getCourseById/getCourseById';
-import { loginCheck } from '../helpers';
+import {
+  getCourseById, getFormattedAuthor, getFormattedDate, getFormattedDuration, loginCheck,
+} from '../helpers';
+import './CourseInfo.scss';
 
 interface ICoursesInfoProps {
   courses: ICourseModel[]

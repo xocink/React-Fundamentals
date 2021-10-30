@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// eslint-disable-next-line import/no-cycle
-
 import { mockedCoursesList } from '../../mockedData';
 import CourseCard from './components/CourseCard/CourseCard';
-import './Courses.scss';
 import SearchInput from '../common/Input/SearchInput';
 import Button from '../common/Button/Button';
 import { getFilteredCourses, loginCheck } from '../helpers';
 import { ICourseModel } from '../CreateCourse/components/interfaces/course-interface';
+import './Courses.scss';
 
 interface ICoursesProps {
   courses : ICourseModel[]

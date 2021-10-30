@@ -4,8 +4,8 @@ import SearchInput from '../common/Input/SearchInput';
 import Button from '../common/Button/Button';
 import { IUser } from './interfaces/user';
 import { IRegistrationResponse } from './interfaces/registrationResponse';
-import './Registration.scss';
 import { emailReg, nameReg, passwordReg } from '../helpers/consts';
+import './Registration.scss';
 
 const Registration = (): JSX.Element => {
   const [name, setName] = useState<string>('');

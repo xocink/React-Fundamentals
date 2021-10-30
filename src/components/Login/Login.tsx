@@ -3,9 +3,9 @@ import { useHistory, Link } from 'react-router-dom';
 import SearchInput from '../common/Input/SearchInput';
 import Button from '../common/Button/Button';
 import { ILoginResponse } from './interfaces/loginResponse';
-import { setToken } from './helpers';
-import './Login.scss';
+import { setItem } from './helpers';
 import { emailReg, passwordReg } from '../helpers/consts';
+import './Login.scss';
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState<string>('');
@@ -15,10 +15,12 @@ const Login = (): JSX.Element => {
 
   useEffect(() => {
     if (loginResponse?.successful) {
-      setToken(loginResponse.result);
+      setItem(loginResponse.result, 'token');
+      setItem(loginResponse.user.name, 'name');
       history.push('/courses');
     }
   });
+
   const handleEmailChange = (value: string, ref: HTMLInputElement | undefined) => {
     if (emailReg.test(value) || ref?.value === '') {
       setEmail(value);

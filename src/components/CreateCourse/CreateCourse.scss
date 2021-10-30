@@ -17,6 +17,7 @@
         display: flex;
         width: 100%;
         justify-content: space-between;
+        margin-bottom: 1rem;
       }
 
       .create-course__description {
@@ -36,10 +37,12 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      margin-bottom: 2rem;
       .authors-block__item {
         width: 50%;
         display: flex;
         flex-direction: column;
+
         h3,p {
           font-size: 2rem;
           margin: 0.5rem 0;

@@ -1,8 +1,6 @@
 import React, {
   useState,
 } from 'react';
-
-import './App.scss';
 import {
   BrowserRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
@@ -15,6 +13,7 @@ import ErrorPage from './components/ErrorPage/ErrorPage';
 import CourseInfo from './components/CourseInfo/CoutseInfo';
 import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
+import './App.scss';
 
 const App = (): JSX.Element => {
   const [courses, setCourses] = useState(mockedCoursesList);

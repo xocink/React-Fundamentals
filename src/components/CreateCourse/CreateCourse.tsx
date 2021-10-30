@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Button from '../common/Button/Button';
 import { IAuthorModel } from './components/interfaces/author-list-interface';
-import './CreateCourse.scss';
 import { ICourseModel } from './components/interfaces/course-interface';
 import { getDateString, loginCheck } from '../helpers';
 import Title from './components/Title/Title';
@@ -15,6 +14,7 @@ import Description from './components/Description/Description';
 import AuthorsList from './components/AuthorsList/AuthorsList';
 import CourseAuthors from './components/CourseAuthors/CourseAuthors';
 import { numberPositiveOnlyReg } from '../helpers/consts';
+import './CreateCourse.scss';
 
 interface ICreateCourseProps {
   courses: ICourseModel[]

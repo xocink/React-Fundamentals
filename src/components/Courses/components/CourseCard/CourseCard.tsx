@@ -2,9 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ICourseModel } from '../../../CreateCourse/components/interfaces/course-interface';
 import Button from '../../../common/Button/Button';
-
-import './CourseCard.scss';
 import { getFormattedAuthor, getFormattedDate, getFormattedDuration } from '../../../helpers';
+import './CourseCard.scss';
 
 const CourseCard = ({
   id, creationDate, description, duration, title, authors,
