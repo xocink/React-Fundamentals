@@ -5,4 +5,3 @@ export const getFormattedDuration = (time : number) : string => {
   const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
   return `${formattedHours}:${formattedMinutes} hours`;
 };
-export default {};

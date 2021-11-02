@@ -1,14 +1,14 @@
 import React from 'react';
-import { getFormattedDuration } from '../../../helpers/formatCourseDuration';
+import { getFormattedDuration } from '../../../helpers';
 import SearchInput from '../../../common/Input/SearchInput';
 
 interface IDurationProps {
-  newDuration : string
-  onDurationChange : (value : string) => void
+  newDuration: string
+  onDurationChange: (value: string, ref? : HTMLInputElement) => void
 }
 
-const Duration = ({ newDuration, onDurationChange }:IDurationProps) : JSX.Element => {
-  const handleChange = (value : string) => {
+const Duration = ({ newDuration, onDurationChange }: IDurationProps): JSX.Element => {
+  const handleChange = (value: string) => {
     onDurationChange(value);
   };
   return (

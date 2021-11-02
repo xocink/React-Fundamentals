@@ -1,16 +1,22 @@
-.courses__wrapper{
-  margin :0 1rem;
+.courses__wrapper {
+  margin: 0 1rem;
+  width: 100%;
 
   .courses__menu {
     display: flex;
     justify-content: space-between;
     padding: 1rem 0;
+    margin: 0 1rem;
 
-    .search__wrapper{
+    .search__wrapper {
       width: 32%;
       justify-content: space-between;
       display: flex;
       align-items: center;
     }
+  }
+
+  .courses__cards {
+    width: 98%;
   }
 }

@@ -1,16 +1,19 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { ICourseModel } from '../../../CreateCourse/components/interfaces/course-interface';
 import Button from '../../../common/Button/Button';
-
+import { getFormattedAuthor, getFormattedDate, getFormattedDuration } from '../../../helpers';
 import './CourseCard.scss';
-import { getFormattedDuration } from '../../../helpers/formatCourseDuration';
-import { getFormattedDate } from '../../../helpers/formateCourseDate';
-import { getFormattedAuthor } from '../../../helpers/getFormatedAuthor';
 
 const CourseCard = ({
-  creationDate, description, duration, title, authors,
-}: ICourseModel): JSX.Element => (
-  <div className="course-card__wrapper">
+  id, creationDate, description, duration, title, authors,
+}: ICourseModel): JSX.Element => {
+  const history = useHistory();
+  const handleButtonClick = () => {
+    history.push(`/courses/add/${id}`);
+  };
+
+  return (
     <div className="course-card">
       <div className="course-card__description-block">
         <h3 className="course-card__title">{title}</h3>
@@ -31,13 +34,11 @@ const CourseCard = ({
         </p>
         <Button
           btnText="Show Course"
-          action={() => {
-
-          }}
+          action={handleButtonClick}
         />
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default CourseCard;

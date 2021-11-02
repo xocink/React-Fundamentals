@@ -1,4 +1,4 @@
-import { ICourseModel } from '../CreateCourse/components/interfaces/course-interface';
+import { ICourseModel } from '../../CreateCourse/components/interfaces/course-interface';
 
 export const getFilteredCourses = (searchQuery: string,
   courses: ICourseModel[]): ICourseModel[] => {
@@ -10,5 +10,3 @@ export const getFilteredCourses = (searchQuery: string,
     .filter((val) => val.title.toLowerCase().includes(searchQuery.toLowerCase()));
   return result;
 };
-
-export default {};

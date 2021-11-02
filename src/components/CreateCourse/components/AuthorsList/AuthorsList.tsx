@@ -1,7 +1,7 @@
 import React from 'react';
 import { IAuthorModel } from '../interfaces/author-list-interface';
 import AuthorItem from '../AuthorItem/AuthorItem';
-import { mockedAuthorsList } from '../../../../mockedData/mockedData';
+import { mockedAuthorsList } from '../../../../mockedData';
 
 interface IAuthorsListProps {
   action : (value : IAuthorModel) => void

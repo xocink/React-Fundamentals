@@ -1,0 +1,88 @@
+import React, { FormEvent, useEffect, useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import SearchInput from '../common/Input/SearchInput';
+import Button from '../common/Button/Button';
+import { ILoginResponse } from './interfaces/loginResponse';
+import { setItem } from './helpers';
+import { emailReg, passwordReg } from '../helpers/consts';
+import './Login.scss';
+
+const Login = (): JSX.Element => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [loginResponse, setLoginResponse] = useState<ILoginResponse>();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (loginResponse?.successful) {
+      setItem(loginResponse.result, 'token');
+      setItem(loginResponse.user.name, 'name');
+      history.push('/courses');
+    }
+  });
+
+  const handleEmailChange = (value: string, ref: HTMLInputElement | undefined) => {
+    if (emailReg.test(value) || ref?.value === '') {
+      setEmail(value);
+      ref?.classList.remove('error');
+    } else {
+      ref?.classList.add('error');
+    }
+  };
+
+  const handlePasswordChange = (value: string, ref: HTMLInputElement | undefined) => {
+    if (passwordReg.test(value) || ref?.value === '') {
+      setPassword(value);
+      ref?.classList.remove('error');
+    } else {
+      ref?.classList.add('error');
+    }
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const tempUser = {
+      email,
+      password,
+    };
+    const getResponse = (): void => {
+      fetch('http://localhost:3000/login', {
+        method: 'POST',
+        body: JSON.stringify(tempUser),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((response) => response.json())
+        .then((res) => setLoginResponse(res))
+        .catch((err) => err);
+    };
+    getResponse();
+  };
+
+  return (
+    <div className="login">
+      <h3 className="login__title">Login</h3>
+      <form onSubmit={handleSubmit} className="login__form">
+        <div className="login__email">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label htmlFor="email">Email</label>
+          <SearchInput type="text" id="email" onChangeAction={handleEmailChange} />
+        </div>
+        <div className="login__password">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label htmlFor="password">Password</label>
+          <SearchInput type="text" id="password" onChangeAction={handlePasswordChange} />
+        </div>
+
+        <Button btnText="Login" isSubmit />
+        <p>
+          Do not have account?
+          <Link to="/registration"> Registration </Link>
+        </p>
+      </form>
+    </div>
+
+  );
+};
+
+export default Login;
