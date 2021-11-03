@@ -1,10 +1,18 @@
 import { Dispatch } from 'redux';
-import { IUser } from '../../components/Registration/interfaces/user';
 import { EUserActions } from './actionTypes';
+import { ILoginResponseStore } from '../interfaces';
 
-const loginUser = (user : IUser) => (dispatch : Dispatch) => {
+export const loginUserAction = (userLog: ILoginResponseStore) => (dispatch: Dispatch) : void => {
+  console.log('we heeeeee');
   dispatch({
     type: EUserActions.LOGIN_USER,
-    payload: user,
+    payload: userLog,
+  });
+};
+
+export const logoutUserAction = (userLog: ILoginResponseStore) => (dispatch: Dispatch) : void => {
+  dispatch({
+    type: EUserActions.LOGOUT_USER,
+    payload: userLog,
   });
 };

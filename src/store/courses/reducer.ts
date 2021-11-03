@@ -1,7 +1,41 @@
-import { ICourseModel } from '../../components/CreateCourse/components/interfaces/course-interface';
+import { ICourseModelStoreItem } from '../interfaces';
+import { ECourseActions } from './actionTypes';
+import { coursesInitialState } from './initialState';
 
-export const FETCH_COURSES = 'FETCH_COURSES';
-export const DELETE_COURSE = 'DELETE_COURSE';
-export const CREATE_COURSE = 'CREATE_COURSE';
+interface ICourseFetchAction {
+  type : ECourseActions.FETCH_COURSES,
+  payload : ICourseModelStoreItem[]
+}
+interface ICourseAddAction {
+  type : ECourseActions.CREATE_COURSE,
+  payload : ICourseModelStoreItem
+}
+interface ICourseDeleteAction {
+  type : ECourseActions.DELETE_COURSE,
+  payload : string
+}
 
-const coursesInitialState : ICourseModel[] = [];
+export type TCourseAction = ICourseAddAction | ICourseFetchAction | ICourseDeleteAction;
+
+export const courseReducer = (state: ICourseModelStoreItem[] = coursesInitialState,
+  action : TCourseAction) : ICourseModelStoreItem[] => {
+  switch (action.type) {
+    case ECourseActions.DELETE_COURSE:
+      return {
+        ...state.filter((el) => el.id !== action.payload),
+      };
+    case ECourseActions.FETCH_COURSES:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case ECourseActions.CREATE_COURSE:
+      return {
+        ...state,
+        ...action.payload,
+
+      };
+    default:
+      return state;
+  }
+};

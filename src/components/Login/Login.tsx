@@ -1,22 +1,26 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import SearchInput from '../common/Input/SearchInput';
 import Button from '../common/Button/Button';
 import { ILoginResponse } from './interfaces/loginResponse';
 import { setItem } from './helpers';
 import { emailReg, passwordReg } from '../helpers/consts';
 import './Login.scss';
+import { loginUserAction } from '../../store/user/actionCreators';
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginResponse, setLoginResponse] = useState<ILoginResponse>();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (loginResponse?.successful) {
       setItem(loginResponse.result, 'token');
       setItem(loginResponse.user.name, 'name');
+      dispatch(loginUserAction(loginResponse));
       history.push('/courses');
     }
   });

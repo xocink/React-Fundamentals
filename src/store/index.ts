@@ -1,20 +1,20 @@
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { ICourseModel } from '../components/CreateCourse/components/interfaces/course-interface';
-import { IAuthorModel } from '../components/CreateCourse/components/interfaces/author-list-interface';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import reducers from './rootReducer';
+import { IStore } from './interfaces';
 
-export interface IUserStore {
-  isAuth: boolean,
-  name: string,
-  email: string,
-  token: string,
-}
+import { authorsInitialState } from './authors/initialState';
+import { coursesInitialState } from './courses/initialState';
+import { userInitialState } from './user/initialState';
 
-export interface IStore {
-  user: IUserStore,
-  courses: ICourseModel[],
-  authors: IAuthorModel[],
+const initialStoreState : IStore = {
+  user: userInitialState,
+  authors: authorsInitialState,
+  courses: coursesInitialState,
 
-}
+};
 
-export const store = createStore({}, applyMiddleware(thunk));
+export const store = createStore(reducers, initialStoreState,
+  composeWithDevTools(applyMiddleware(thunk)));
+// export const store = createStore(reducers, initialStoreState, applyMiddleware(thunk));

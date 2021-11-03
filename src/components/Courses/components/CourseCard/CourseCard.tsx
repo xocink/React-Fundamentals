@@ -1,16 +1,24 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { ICourseModel } from '../../../CreateCourse/components/interfaces/course-interface';
 import Button from '../../../common/Button/Button';
 import { getFormattedAuthor, getFormattedDate, getFormattedDuration } from '../../../helpers';
 import './CourseCard.scss';
+import { deleteCourses } from '../../../../store/courses/actionCreators';
 
 const CourseCard = ({
   id, creationDate, description, duration, title, authors,
 }: ICourseModel): JSX.Element => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const handleButtonClick = () => {
     history.push(`/courses/add/${id}`);
+  };
+
+  const handleDeleteBtn = () => {
+    dispatch(deleteCourses(id));
   };
 
   return (
@@ -35,6 +43,10 @@ const CourseCard = ({
         <Button
           btnText="Show Course"
           action={handleButtonClick}
+        />
+        <Button
+          btnText="Delete"
+          action={handleDeleteBtn}
         />
       </div>
     </div>
