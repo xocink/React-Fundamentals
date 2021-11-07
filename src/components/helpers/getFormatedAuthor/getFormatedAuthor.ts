@@ -5,7 +5,6 @@ const getAuthorsById = (authorsId : string[], authors : IAuthorModelStore[]) : s
 );
 
 export const getFormattedAuthor = (authorIds : string[], authors : IAuthorModelStore[]) :string => {
-  console.log(authors);
   const authorArr : string[] = getAuthorsById(authorIds, authors);
   return authorArr.join(', ');
 };

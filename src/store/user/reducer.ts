@@ -12,9 +12,7 @@ export const userReducer = (state: IUserStore = userInitialState,
   action : IUserAction) : IUserStore => {
   switch (action.type) {
     case EUserActions.LOGIN_USER:
-      console.log('we here');
       return {
-        // ...state,
         isAuth: true,
         token: action.payload.result,
         email: action.payload.user.email,

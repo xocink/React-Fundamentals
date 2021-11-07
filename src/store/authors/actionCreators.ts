@@ -13,6 +13,7 @@ export const fetchAuthors = () => async (dispatch : Dispatch<TAuthorActions>) : 
       payload: response.result,
     });
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e);
   }
 };
@@ -23,7 +24,6 @@ export const createAuthors = (name : string) => async (dispatch: Dispatch<TAutho
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', token!);
-    // const body = JSON.stringify({ name });
     await fetch('http://localhost:3000/authors/add', {
       method: 'POST',
       headers,
@@ -38,6 +38,7 @@ export const createAuthors = (name : string) => async (dispatch: Dispatch<TAutho
       payload: response.result,
     });
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e);
   }
 };

@@ -5,7 +5,6 @@ export const getFilteredCourses = (searchQuery: string,
   if (!searchQuery) {
     return courses;
   }
-  console.log(courses);
   const result: ICourseModel[] = courses.slice()
     .filter((val) => val.title.toLowerCase().includes(searchQuery.toLowerCase()));
   return result;

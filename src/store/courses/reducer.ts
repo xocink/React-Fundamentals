@@ -3,25 +3,27 @@ import { ECourseActions } from './actionTypes';
 import { coursesInitialState } from './initialState';
 
 interface ICourseFetchAction {
-  type : ECourseActions.FETCH_COURSES,
-  payload : ICourseModelStoreItem[]
-}
-interface ICourseAddAction {
-  type : ECourseActions.CREATE_COURSE,
+  type: ECourseActions.FETCH_COURSES,
+  payload: ICourseModelStoreItem[]
 }
 
 interface ICourseAddAction {
-  type2 : ECourseActions.CREATE_COURSE,
+  type: ECourseActions.CREATE_COURSE,
 }
+
+interface ICourseAddAction {
+  type: ECourseActions.CREATE_COURSE,
+}
+
 interface ICourseDeleteAction {
-  type : ECourseActions.DELETE_COURSE,
-  payload : string
+  type: ECourseActions.DELETE_COURSE,
+  payload: string
 }
 
 export type TCourseAction = ICourseAddAction | ICourseFetchAction | ICourseDeleteAction;
 
 export const courseReducer = (state: ICourseModelStoreItem[] = coursesInitialState,
-  action : TCourseAction) : ICourseModelStoreItem[] => {
+  action: TCourseAction): ICourseModelStoreItem[] => {
   switch (action.type) {
     case ECourseActions.DELETE_COURSE:
       return [
