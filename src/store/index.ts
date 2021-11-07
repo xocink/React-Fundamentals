@@ -15,6 +15,6 @@ const initialStoreState : IStore = {
 
 };
 
-export const store = createStore(reducers, initialStoreState,
+export const store = createStore(reducers,
   composeWithDevTools(applyMiddleware(thunk)));
 // export const store = createStore(reducers, initialStoreState, applyMiddleware(thunk));

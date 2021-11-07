@@ -14,6 +14,14 @@ export interface ICourseModelStoreItem {
   authors: string[]
 }
 
+export interface ICourseModelRequestItem {
+  title: string
+  description: string
+  creationDate: string
+  duration: number
+  authors: string[]
+}
+
 export interface IAuthorModelStore {
   id: string
   name: string
@@ -32,4 +40,14 @@ export interface ILoginResponseStore {
     email: string
     name: string
   }
+}
+
+export interface ICoursesFetchResponse {
+  successful: boolean,
+  result : ICourseModelStoreItem[]
+}
+
+export interface IAuthorsFetchResponse {
+  successful : boolean,
+  result : IAuthorModelStore[]
 }

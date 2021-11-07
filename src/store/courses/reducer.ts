@@ -8,7 +8,10 @@ interface ICourseFetchAction {
 }
 interface ICourseAddAction {
   type : ECourseActions.CREATE_COURSE,
-  payload : ICourseModelStoreItem
+}
+
+interface ICourseAddAction {
+  type2 : ECourseActions.CREATE_COURSE,
 }
 interface ICourseDeleteAction {
   type : ECourseActions.DELETE_COURSE,
@@ -21,20 +24,17 @@ export const courseReducer = (state: ICourseModelStoreItem[] = coursesInitialSta
   action : TCourseAction) : ICourseModelStoreItem[] => {
   switch (action.type) {
     case ECourseActions.DELETE_COURSE:
-      return {
+      return [
         ...state.filter((el) => el.id !== action.payload),
-      };
+      ];
     case ECourseActions.FETCH_COURSES:
-      return {
-        ...state,
+      return [
         ...action.payload,
-      };
+      ];
     case ECourseActions.CREATE_COURSE:
-      return {
+      return [
         ...state,
-        ...action.payload,
-
-      };
+      ];
     default:
       return state;
   }

@@ -1,23 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { IAuthorModel } from '../interfaces/author-list-interface';
 import AuthorItem from '../AuthorItem/AuthorItem';
-import { mockedAuthorsList } from '../../../../mockedData';
+import { getAuthorsSelector } from '../../../../store/selectors/selectors';
 
 interface IAuthorsListProps {
-  action : (value : IAuthorModel) => void
-  addedToCourseAuthors : IAuthorModel[]
+  action: (value: IAuthorModel) => void
 }
 
-const AuthorsList = ({ addedToCourseAuthors, action } : IAuthorsListProps) : JSX.Element => {
-  const defaultAuthors = mockedAuthorsList;
+const AuthorsList = ({ action }: IAuthorsListProps): JSX.Element => {
+  const defaultAuthors = useSelector(getAuthorsSelector);
 
   return (
     <div className="create-course__authors authors-block__item">
       <h3>Authors</h3>
       {defaultAuthors.map((elem) => (
-        <AuthorItem key={elem.id} author={elem} btnLabel="Add author" action={action} />
-      ))}
-      {addedToCourseAuthors.map((elem) => (
         <AuthorItem key={elem.id} author={elem} btnLabel="Add author" action={action} />
       ))}
 

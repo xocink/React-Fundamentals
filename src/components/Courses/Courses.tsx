@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { mockedCoursesList } from '../../mockedData';
 import CourseCard from './components/CourseCard/CourseCard';
 import SearchInput from '../common/Input/SearchInput';
@@ -9,29 +9,33 @@ import { getFilteredCourses, loginCheck } from '../helpers';
 import { ICourseModel } from '../CreateCourse/components/interfaces/course-interface';
 import './Courses.scss';
 import { fetchCourses } from '../../store/courses/actionCreators';
+import { getCoursesSelector } from '../../store/selectors/selectors';
+import { fetchAuthors } from '../../store/authors/actionCreators';
 
 interface ICoursesProps {
-  courses : ICourseModel[]
+  courses: ICourseModel[]
 }
 
-const Courses = ({ courses } : ICoursesProps): JSX.Element => {
+const Courses = ({ courses }: ICoursesProps): JSX.Element => {
+  const coursesList = useSelector(getCoursesSelector);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [shownCourses, setShownCourses] = useState<ICourseModel[]>(mockedCoursesList);
+  const [shownCourses, setShownCourses] = useState<ICourseModel[]>(coursesList);
   const history = useHistory();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setShownCourses(getFilteredCourses(searchQuery, courses));
-  }, [searchQuery]);
 
   useEffect(() => {
     if (!loginCheck()) {
       history.push('/login');
     }
-    dispatch(fetchCourses(mockedCoursesList));
+    dispatch(fetchCourses());
+    dispatch(fetchAuthors());
   }, []);
 
-  const onQueryChange = (query : string) => {
+  useEffect(() => {
+    setShownCourses(getFilteredCourses(searchQuery, coursesList));
+  }, [searchQuery]);
+
+  const onQueryChange = (query: string) => {
     setSearchQuery(query);
   };
   return (
@@ -46,7 +50,7 @@ const Courses = ({ courses } : ICoursesProps): JSX.Element => {
         </Link>
       </div>
       <div className="courses__cards">
-        {shownCourses.map((item) => (
+        {coursesList.map((item) => (
           <CourseCard
             key={`${item.id}`}
             id={item.id}
@@ -58,8 +62,8 @@ const Courses = ({ courses } : ICoursesProps): JSX.Element => {
           />
         ))}
       </div>
-
     </div>
   );
 };
+
 export default Courses;

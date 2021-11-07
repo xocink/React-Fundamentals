@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
 import Button from '../common/Button/Button';
 import { IAuthorModel } from './components/interfaces/author-list-interface';
 import { ICourseModel } from './components/interfaces/course-interface';
@@ -15,6 +16,9 @@ import AuthorsList from './components/AuthorsList/AuthorsList';
 import CourseAuthors from './components/CourseAuthors/CourseAuthors';
 import { numberPositiveOnlyReg } from '../helpers/consts';
 import './CreateCourse.scss';
+import { addCourses } from '../../store/courses/actionCreators';
+import { createAuthors } from '../../store/authors/actionCreators';
+import { ICourseModelRequestItem } from '../../store/interfaces';
 
 interface ICreateCourseProps {
   courses: ICourseModel[]
@@ -29,6 +33,7 @@ const CreateCourse = ({ changeCoursesList, courses }: ICreateCourseProps): JSX.E
   const [addedAuthor, setAddedAuthor] = useState<IAuthorModel[]>([]);
   const [courseAuthors, setCourseAuthors] = useState<IAuthorModel[]>([]);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!loginCheck()) {
@@ -49,6 +54,7 @@ const CreateCourse = ({ changeCoursesList, courses }: ICreateCourseProps): JSX.E
     if (tempArr.some((value) => value.name === author.name)) {
       return;
     }
+    dispatch(createAuthors(testAuthor));
     tempArr.push(author);
     setAddedAuthor(() => [...tempArr]);
   };
@@ -62,7 +68,7 @@ const CreateCourse = ({ changeCoursesList, courses }: ICreateCourseProps): JSX.E
     setTitle(newTitle);
   };
 
-  const handleDurationChange = (newDuration: string, ref : HTMLInputElement | undefined) => {
+  const handleDurationChange = (newDuration: string, ref: HTMLInputElement | undefined) => {
     if (numberPositiveOnlyReg.test(newDuration) || newDuration === '') {
       setDuration(newDuration);
       ref?.classList.remove('error');
@@ -84,11 +90,10 @@ const CreateCourse = ({ changeCoursesList, courses }: ICreateCourseProps): JSX.E
     setCourseAuthors(() => [...tempArr]);
   };
 
-  const handleCreateCourseBtn = (e : FormEvent<HTMLFormElement>) => {
+  const handleCreateCourseBtn = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (duration && courseAuthors.length !== 0 && title && courseDescription) {
-      const courseObj: ICourseModel = {
-        id: uuidv4(),
+      const courseObj: ICourseModelRequestItem = {
         title,
         description: courseDescription,
         creationDate: getDateString(),
@@ -96,7 +101,7 @@ const CreateCourse = ({ changeCoursesList, courses }: ICreateCourseProps): JSX.E
 
         authors: courseAuthors.map((elem) => elem.id),
       };
-      changeCoursesList([...courses, courseObj]);
+      dispatch(addCourses(courseObj));
       history.push('/courses');
     } else {
       alert('fill all fields'); // alert placed here according to task requirements
@@ -121,7 +126,6 @@ const CreateCourse = ({ changeCoursesList, courses }: ICreateCourseProps): JSX.E
             btnAction={handleAddingAuthor}
           />
           <AuthorsList
-            addedToCourseAuthors={addedAuthor}
             action={addAuthorToCourse}
           />
 

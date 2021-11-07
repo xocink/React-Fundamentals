@@ -1,10 +1,11 @@
-import { mockedAuthorsList } from '../../../mockedData';
+import { IAuthorModelStore } from '../../../store/interfaces';
 
-const getAuthorsById = (authorsId : string[]) : string[] => (
-  mockedAuthorsList.filter((item) => authorsId.includes(item.id)).map((item) => item.name)
+const getAuthorsById = (authorsId : string[], authors : IAuthorModelStore[]) : string[] => (
+  authors.filter((item) => authorsId.includes(item.id)).map((item) => item.name)
 );
 
-export const getFormattedAuthor = (authorsId : string[]) :string => {
-  const authorArr : string[] = getAuthorsById(authorsId);
+export const getFormattedAuthor = (authorIds : string[], authors : IAuthorModelStore[]) :string => {
+  console.log(authors);
+  const authorArr : string[] = getAuthorsById(authorIds, authors);
   return authorArr.join(', ');
 };

@@ -5,7 +5,7 @@ import { IStore } from '../../store/interfaces';
 import Button from '../common/Button/Button';
 import { logoutUser } from '../helpers';
 import { logoutUserAction } from '../../store/user/actionCreators';
-import './Header.scss';
+import style from './Header.scss'; // declaration for style
 
 const mockedData = {
   successful: true,
@@ -16,9 +16,17 @@ const mockedData = {
   },
 };
 
-const Header = (): JSX.Element => {
+interface IHeader {
+  btnOnClick : () => void,
+  btnLabel : string
+  btnClassName? : string,
+  headerProfile? : string
+  linkUrl? : string
+}
+
+const Header = (props : IHeader): JSX.Element => {
+  const { headerProfile, linkUrl = '/courses' } = props;
   const history = useHistory();
-  const btnText = 'Logout';
   const user = useSelector((state: IStore) => state.user);
   const dispatch = useDispatch();
 
@@ -28,10 +36,12 @@ const Header = (): JSX.Element => {
     history.push('/login');
   };
 
+  // const headerProfileStyles = classnames(style.header__profile, headerProfile);
+
   return (
     <header className="header">
       <div className="header__content-wrapper">
-        <Link to="/courses">
+        <Link to={linkUrl}>
           <h1 className="header__logo">Logo</h1>
         </Link>
         <div className="header__profile">

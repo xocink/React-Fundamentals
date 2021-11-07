@@ -1,24 +1,25 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ICourseModel } from '../../../CreateCourse/components/interfaces/course-interface';
 import Button from '../../../common/Button/Button';
 import { getFormattedAuthor, getFormattedDate, getFormattedDuration } from '../../../helpers';
 import './CourseCard.scss';
 import { deleteCourses } from '../../../../store/courses/actionCreators';
+import { getAuthorsSelector } from '../../../../store/selectors/selectors';
 
 const CourseCard = ({
   id, creationDate, description, duration, title, authors,
 }: ICourseModel): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const authorsList = useSelector(getAuthorsSelector);
   const handleButtonClick = () => {
     history.push(`/courses/add/${id}`);
   };
 
   const handleDeleteBtn = () => {
-    dispatch(deleteCourses(id));
+    dispatch(deleteCourses('66cc289e-6de9-49b2-9ca7-8b4f409d6467'));
   };
 
   return (
@@ -30,7 +31,7 @@ const CourseCard = ({
       <div className="course-card__info-block">
         <p>
           Author:&nbsp;&nbsp;
-          {getFormattedAuthor(authors)}
+          {getFormattedAuthor(authors, authorsList)}
         </p>
         <p>
           Duration:&nbsp;&nbsp;
