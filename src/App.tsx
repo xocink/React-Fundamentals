@@ -23,7 +23,6 @@ const App = (): JSX.Element => {
   };
 
   return (
-
     <BrowserRouter>
       <div className="container">
         <Header />
@@ -44,7 +43,9 @@ const App = (): JSX.Element => {
             <CreateCourse courses={courses} changeCoursesList={handleCoursesChange} />
           </Route>
           <Route path="/courses/add/:id" exact>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+            <CourseInfo courses={courses} />
+          </Route>
+          <Route path="/courses/update/:id" exact>
             <CourseInfo courses={courses} />
           </Route>
           <Route path="*" component={ErrorPage} />
