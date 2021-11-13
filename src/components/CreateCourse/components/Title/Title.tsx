@@ -3,9 +3,10 @@ import SearchInput from '../../../common/Input/SearchInput';
 
 interface ITitleProps {
   action : (newTitle : string) => void
+  value : string
 }
 
-const Title = ({ action } : ITitleProps) : JSX.Element => {
+const Title = ({ action, value } : ITitleProps) : JSX.Element => {
   const handleTitleChange = (newTitle : string) => {
     action(newTitle);
   };
@@ -15,7 +16,7 @@ const Title = ({ action } : ITitleProps) : JSX.Element => {
       <h3 className="create-course__title">
         Title :&nbsp;
       </h3>
-      <SearchInput type="text" onChangeAction={handleTitleChange} />
+      <SearchInput value={value} type="text" onChangeAction={handleTitleChange} />
     </div>
   );
 };

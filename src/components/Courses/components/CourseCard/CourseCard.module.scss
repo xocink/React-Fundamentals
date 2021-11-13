@@ -1,5 +1,5 @@
 
-.course-card {
+.courseCard {
   display: flex;
   justify-content: space-between;
   text-align: left;
@@ -14,17 +14,17 @@
   margin-bottom: 1.5rem;
   margin-left: 1rem;
   margin-right: 1rem;
-  &__description-block {
+  &__descriptionBlock {
     width: 65%;
     min-width: 65%;
 
-    .course-card__title {
+    .courseCard__title {
       font-size: 2rem;
       margin-bottom: 1rem;
     }
   }
 
-  &__info-block {
+  &__infoBlock {
     width: 25%;
 
     p {
@@ -32,4 +32,18 @@
     }
   }
 
+}
+
+.small {
+  width: 2.5rem;
+}
+
+.delete {
+  background-image: url("../../trash-can-icon.png");
+  background-size: cover;
+}
+
+.update {
+  background-image: url("../../pencil.png");
+  background-size: cover;
 }

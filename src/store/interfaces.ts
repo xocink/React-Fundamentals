@@ -3,6 +3,7 @@ export interface IUserStore {
   name: string,
   email: string,
   token: string,
+  role? : string
 }
 
 export interface ICourseModelStoreItem {
@@ -50,4 +51,26 @@ export interface ICoursesFetchResponse {
 export interface IAuthorsFetchResponse {
   successful : boolean,
   result : IAuthorModelStore[]
+}
+
+export interface ITrackMyself {
+  successful: boolean,
+  result: {
+    name: string
+    email: string
+    password: string
+    role: string
+    id: string
+  }
+}
+export interface ITrackMyselfPayload {
+  successful: boolean,
+  result: {
+    name: string
+    email: string
+    password: string
+    role: string
+    id: string
+    token : string
+  }
 }

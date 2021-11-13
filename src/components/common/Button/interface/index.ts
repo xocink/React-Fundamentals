@@ -4,5 +4,6 @@ export interface IBtnProps {
   btnText : string
   action? : () => void
   isSubmit? : boolean
-  type? : EButtonTypes
+  type? : EButtonTypes,
+  btnClassName? : string
 }

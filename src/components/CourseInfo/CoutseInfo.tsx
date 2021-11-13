@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '../common/Button/Button';
-import { ICourseModel } from '../CreateCourse/components/interfaces/course-interface';
 import {
   getCourseById, getFormattedAuthor, getFormattedDate, getFormattedDuration, loginCheck,
 } from '../helpers';
@@ -11,11 +10,11 @@ import './CourseInfo.scss';
 import { IStore } from '../../store/interfaces';
 import { getAuthorsSelector } from '../../store/selectors/selectors';
 
-interface ICoursesInfoProps {
-  courses: ICourseModel[]
-}
+// interface ICoursesInfoProps {
+//   courses: ICourseModel[]
+// }
 
-const CourseInfo = ({ courses }: ICoursesInfoProps): JSX.Element => {
+const CourseInfo = (): JSX.Element => {
   const history = useHistory();
   const coursesList = useSelector((store : IStore) => store.courses);
   const { id } = useParams<{ id: string }>();

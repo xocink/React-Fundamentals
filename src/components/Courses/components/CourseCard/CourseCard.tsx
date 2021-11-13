@@ -1,12 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
 import { ICourseModel } from '../../../CreateCourse/components/interfaces/course-interface';
 import Button from '../../../common/Button/Button';
 import { getFormattedAuthor, getFormattedDate, getFormattedDuration } from '../../../helpers';
-import './CourseCard.scss';
 import { deleteCourses } from '../../../../store/courses/actionCreators';
-import { getAuthorsSelector } from '../../../../store/selectors/selectors';
+import { getAuthorsSelector, getUserSelector } from '../../../../store/selectors/selectors';
+import styles from './CourseCard.module.scss';
+import { AdminRole } from '../../consts';
 
 const CourseCard = ({
   id, creationDate, description, duration, title, authors,
@@ -14,21 +16,27 @@ const CourseCard = ({
   const history = useHistory();
   const dispatch = useDispatch();
   const authorsList = useSelector(getAuthorsSelector);
+  const user = useSelector(getUserSelector);
+  const deleteButtonStyles = classNames(styles.small, styles.delete);
+  const updateButtonStyles = classNames(styles.small, styles.update);
+
   const handleButtonClick = () => {
     history.push(`/courses/add/${id}`);
   };
-
-  const handleDeleteBtn = () => {
-    dispatch(deleteCourses('66cc289e-6de9-49b2-9ca7-8b4f409d6467'));
+  const handleUpdateClick = () => {
+    history.push(`/courses/update/${id}`);
   };
 
+  const handleDeleteBtn = () => {
+    dispatch(deleteCourses(id));
+  };
   return (
-    <div className="course-card">
-      <div className="course-card__description-block">
-        <h3 className="course-card__title">{title}</h3>
+    <div className={styles.courseCard}>
+      <div className={styles.courseCard__descriptionBlock}>
+        <h3 className={styles.courseCard__title}>{title}</h3>
         <div className="course-card__description">{description}</div>
       </div>
-      <div className="course-card__info-block">
+      <div className={styles.courseCard__infoBlock}>
         <p>
           Author:&nbsp;&nbsp;
           {getFormattedAuthor(authors, authorsList)}
@@ -45,10 +53,20 @@ const CourseCard = ({
           btnText="Show Course"
           action={handleButtonClick}
         />
-        <Button
-          btnText="Delete"
-          action={handleDeleteBtn}
-        />
+        {user.role === AdminRole ? (
+          <>
+            <Button
+              btnText=""
+              action={handleDeleteBtn}
+              btnClassName={deleteButtonStyles}
+            />
+            <Button
+              btnText=""
+              action={handleUpdateClick}
+              btnClassName={updateButtonStyles}
+            />
+          </>
+        ) : ''}
       </div>
     </div>
   );
