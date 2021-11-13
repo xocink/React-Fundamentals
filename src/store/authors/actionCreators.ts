@@ -3,7 +3,7 @@ import { TAuthorActions } from './reducer';
 import { IAuthorsFetchResponse } from '../interfaces';
 import { EAuthorsActions } from './actionTypes';
 
-export default {};
+const token = localStorage.getItem('token') || '';
 
 export const fetchAuthors = () => async (dispatch : Dispatch<TAuthorActions>) : Promise<void> => {
   try {
@@ -18,12 +18,12 @@ export const fetchAuthors = () => async (dispatch : Dispatch<TAuthorActions>) : 
   }
 };
 
-export const createAuthors = (name : string) => async (dispatch: Dispatch<TAuthorActions>) => {
+export const createAuthors = (name : string) => async (dispatch
+: Dispatch<TAuthorActions>) : Promise<void> => {
   try {
-    const token = localStorage.getItem('token');
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', token!);
+    headers.append('Authorization', token);
     await fetch('http://localhost:3000/authors/add', {
       method: 'POST',
       headers,
