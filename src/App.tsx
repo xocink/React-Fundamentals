@@ -1,29 +1,33 @@
-import React, {
-  useState,
-} from 'react';
+import React
+, { useEffect } from 'react';
 import {
   BrowserRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Header from './components/Header/Header';
 import Courses from './components/Courses/Courses';
-import CreateCourse from './components/CreateCourse/CreateCourse';
-import { mockedCoursesList } from './mockedData';
-import { ICourseModel } from './components/CreateCourse/components/interfaces/course-interface';
+import CreateForm from './components/CreateCourse/CreateForm';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import CourseInfo from './components/CourseInfo/CoutseInfo';
 import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
 import './App.scss';
+import { TrackUserAction } from './store/user/actionCreators';
+import { fetchCourses } from './store/courses/actionCreators';
+import { fetchAuthors } from './store/authors/actionCreators';
 
 const App = (): JSX.Element => {
-  const [courses, setCourses] = useState(mockedCoursesList);
-
-  const handleCoursesChange = (newCourseList: ICourseModel[]) => {
-    setCourses([...newCourseList]);
-  };
+  const token = localStorage.getItem('token');
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (token) {
+      dispatch(TrackUserAction());
+      dispatch(fetchCourses());
+      dispatch(fetchAuthors());
+    }
+  }, []);
 
   return (
-
     <BrowserRouter>
       <div className="container">
         <Header />
@@ -38,14 +42,16 @@ const App = (): JSX.Element => {
             <Registration />
           </Route>
           <Route path="/courses" exact>
-            <Courses courses={courses} />
+            <Courses />
           </Route>
           <Route path="/courses/add" exact>
-            <CreateCourse courses={courses} changeCoursesList={handleCoursesChange} />
+            <CreateForm />
           </Route>
           <Route path="/courses/add/:id" exact>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <CourseInfo courses={courses} />
+            <CourseInfo />
+          </Route>
+          <Route path="/courses/update/:id" exact>
+            <CreateForm />
           </Route>
           <Route path="*" component={ErrorPage} />
         </Switch>

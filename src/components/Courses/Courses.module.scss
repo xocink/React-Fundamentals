@@ -18,5 +18,10 @@
 
   .courses__cards {
     width: 98%;
+
+    .small {
+      width: 2rem;
+      padding: 0;
+    }
   }
 }

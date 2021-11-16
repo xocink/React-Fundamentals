@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Button from '../common/Button/Button';
-import { ICourseModel } from '../CreateCourse/components/interfaces/course-interface';
 import {
   getCourseById, getFormattedAuthor, getFormattedDate, getFormattedDuration, loginCheck,
 } from '../helpers';
 import './CourseInfo.scss';
 
-interface ICoursesInfoProps {
-  courses: ICourseModel[]
-}
+import { IStore } from '../../store/interfaces';
+import { getAuthorsSelector } from '../../store/selectors/selectors';
 
-const CourseInfo = ({ courses }: ICoursesInfoProps): JSX.Element => {
+// interface ICoursesInfoProps {
+//   courses: ICourseModel[]
+// }
+
+const CourseInfo = (): JSX.Element => {
   const history = useHistory();
+  const coursesList = useSelector((store : IStore) => store.courses);
   const { id } = useParams<{ id: string }>();
-
-  const course = getCourseById(courses, id);
+  const authors = useSelector(getAuthorsSelector);
+  const course = getCourseById(coursesList, id);
 
   useEffect(() => {
     if (!loginCheck()) {
@@ -41,7 +45,7 @@ const CourseInfo = ({ courses }: ICoursesInfoProps): JSX.Element => {
           </p>
           <p>
             Author:&nbsp;&nbsp;
-            {getFormattedAuthor(course.authors)}
+            {getFormattedAuthor(course.authors, authors)}
           </p>
           <p>
             Duration:&nbsp;&nbsp;

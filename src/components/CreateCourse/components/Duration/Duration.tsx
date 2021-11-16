@@ -18,7 +18,7 @@ const Duration = ({ newDuration, onDurationChange }: IDurationProps): JSX.Elemen
           Duration: &nbsp;
           {getFormattedDuration(+newDuration)}
         </h3>
-        <SearchInput type="number" onChangeAction={handleChange} />
+        <SearchInput value={newDuration} type="number" onChangeAction={handleChange} />
       </div>
     </div>
 

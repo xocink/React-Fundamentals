@@ -23,7 +23,7 @@ const CreateAuthor = ({
         {authorName}
       </h3>
       <div>
-        <SearchInput type="text" onChangeAction={onChangeHandle} />
+        <SearchInput value={authorName} type="text" onChangeAction={onChangeHandle} />
         <Button btnText="Add author" action={btnAction} />
       </div>
     </div>

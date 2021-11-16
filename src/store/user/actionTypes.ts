@@ -1,0 +1,5 @@
+export enum EUserActions {
+  LOGIN_USER = 'LOGIN_USER',
+  LOGOUT_USER = 'LOGOUT_USER',
+  TRACK_MYSELF = 'TRACK_MYSELF',
+}

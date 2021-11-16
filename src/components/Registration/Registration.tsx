@@ -19,6 +19,7 @@ const Registration = (): JSX.Element => {
       setEmail(value);
       ref?.classList.remove('error');
     } else {
+      setEmail(value);
       ref?.classList.add('error');
     }
   };
@@ -28,6 +29,7 @@ const Registration = (): JSX.Element => {
       setPassword(value);
       ref?.classList.remove('error');
     } else {
+      setPassword(value);
       ref?.classList.add('error');
     }
   };
@@ -37,6 +39,7 @@ const Registration = (): JSX.Element => {
       setName(value);
       ref?.classList.remove('error');
     } else {
+      setName(value);
       ref?.classList.add('error');
     }
   };
@@ -75,17 +78,17 @@ const Registration = (): JSX.Element => {
         <div className="registration__name">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="name">Name</label>
-          <SearchInput type="text" id="name" onChangeAction={handleNameChange} />
+          <SearchInput value={name} type="text" id="name" onChangeAction={handleNameChange} />
         </div>
         <div className="registration__email">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="email">Email</label>
-          <SearchInput type="text" id="email" onChangeAction={handleEmailChange} />
+          <SearchInput value={email} type="text" id="email" onChangeAction={handleEmailChange} />
         </div>
         <div className="registration__password">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="password">Password</label>
-          <SearchInput type="text" id="password" onChangeAction={handlePasswordChange} />
+          <SearchInput value={password} type="text" id="password" onChangeAction={handlePasswordChange} />
         </div>
         <Button btnText="Registration" isSubmit />
         <p>

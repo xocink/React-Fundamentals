@@ -1,31 +1,38 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import SearchInput from '../common/Input/SearchInput';
 import Button from '../common/Button/Button';
 import { ILoginResponse } from './interfaces/loginResponse';
 import { setItem } from './helpers';
 import { emailReg, passwordReg } from '../helpers/consts';
 import './Login.scss';
+import { loginUserAction, TrackUserAction } from '../../store/user/actionCreators';
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginResponse, setLoginResponse] = useState<ILoginResponse>();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (loginResponse?.successful) {
       setItem(loginResponse.result, 'token');
       setItem(loginResponse.user.name, 'name');
+      dispatch(loginUserAction(loginResponse));
+      dispatch(TrackUserAction());
       history.push('/courses');
     }
   });
 
   const handleEmailChange = (value: string, ref: HTMLInputElement | undefined) => {
+    console.log(emailReg.test(value));
     if (emailReg.test(value) || ref?.value === '') {
       setEmail(value);
       ref?.classList.remove('error');
     } else {
+      setEmail(value);
       ref?.classList.add('error');
     }
   };
@@ -35,6 +42,7 @@ const Login = (): JSX.Element => {
       setPassword(value);
       ref?.classList.remove('error');
     } else {
+      setPassword(value);
       ref?.classList.add('error');
     }
   };
@@ -66,12 +74,12 @@ const Login = (): JSX.Element => {
         <div className="login__email">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="email">Email</label>
-          <SearchInput type="text" id="email" onChangeAction={handleEmailChange} />
+          <SearchInput value={email} type="text" id="email" onChangeAction={handleEmailChange} />
         </div>
         <div className="login__password">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="password">Password</label>
-          <SearchInput type="text" id="password" onChangeAction={handlePasswordChange} />
+          <SearchInput value={password} type="text" id="password" onChangeAction={handlePasswordChange} />
         </div>
 
         <Button btnText="Login" isSubmit />
