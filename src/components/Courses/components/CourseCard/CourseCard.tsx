@@ -33,19 +33,19 @@ const CourseCard = ({
   return (
     <div className={styles.courseCard}>
       <div className={styles.courseCard__descriptionBlock}>
-        <h3 className={styles.courseCard__title}>{title}</h3>
-        <div className="course-card__description">{description}</div>
+        <h3 data-testid="courseCardTitle" className={styles.courseCard__title}>{title}</h3>
+        <div data-testid="courseCardDescription" className="course-card__description">{description}</div>
       </div>
       <div className={styles.courseCard__infoBlock}>
-        <p>
+        <p data-testid="courseCardAuthors">
           Author:&nbsp;&nbsp;
           {getFormattedAuthor(authors, authorsList)}
         </p>
-        <p>
+        <p data-testid="courseCardDuration">
           Duration:&nbsp;&nbsp;
           {getFormattedDuration(duration)}
         </p>
-        <p>
+        <p data-testid="courseCardCreationDate">
           Created:&nbsp;&nbsp;
           {getFormattedDate(creationDate)}
         </p>

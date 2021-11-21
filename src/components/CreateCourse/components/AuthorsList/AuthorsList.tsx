@@ -12,7 +12,7 @@ const AuthorsList = ({ action }: IAuthorsListProps): JSX.Element => {
   const defaultAuthors = useSelector(getAuthorsSelector);
 
   return (
-    <div className="create-course__authors authors-block__item">
+    <div data-testid="authorsList" className="create-course__authors authors-block__item">
       <h3>Authors</h3>
       {defaultAuthors.map((elem) => (
         <AuthorItem key={elem.id} author={elem} btnLabel="Add author" action={action} />

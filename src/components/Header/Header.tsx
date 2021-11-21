@@ -40,10 +40,10 @@ const Header = (): JSX.Element => {
     <header className={style.header}>
       <div className={style.header__contentWrapper}>
         <Link to="/courses">
-          <h1 className={style.header__logo}>Logo</h1>
+          <h1 data-testid="logo" className={style.header__logo}>Logo</h1>
         </Link>
         <div className={style.header__profile}>
-          <h2 className={style.header__profile__username}>{user.name}</h2>
+          <h2 data-testid="username" className={style.header__profile__username}>{user.name || 'Admin'}</h2>
           <Button btnText={user.isAuth ? 'Logout' : 'Login'} action={handleLogout} />
         </div>
       </div>

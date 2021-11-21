@@ -9,7 +9,7 @@ import { emailReg, passwordReg } from '../helpers/consts';
 import './Login.scss';
 import { loginUserAction, TrackUserAction } from '../../store/user/actionCreators';
 
-const Login = (): JSX.Element => {
+const Login : React.FC = (): JSX.Element => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginResponse, setLoginResponse] = useState<ILoginResponse>();
@@ -27,7 +27,6 @@ const Login = (): JSX.Element => {
   });
 
   const handleEmailChange = (value: string, ref: HTMLInputElement | undefined) => {
-    console.log(emailReg.test(value));
     if (emailReg.test(value) || ref?.value === '') {
       setEmail(value);
       ref?.classList.remove('error');

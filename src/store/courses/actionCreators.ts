@@ -36,6 +36,7 @@ export const deleteCourses = (
       payload: id,
     });
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e);
   }
   try {
