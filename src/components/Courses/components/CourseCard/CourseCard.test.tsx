@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import * as React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -31,7 +31,6 @@ describe('Course card tests', () => {
   };
   const mockedStore = configureStore();
   let store;
-  let wrapper;
 
   it('should render right title', () => {
     store = mockedStore(initialStoreState);
@@ -67,7 +66,7 @@ describe('Course card tests', () => {
           {...mockedCourseCard}
         />
       </BrowserRouter>
-                                   </Provider>);
+    </Provider>);
     const title = getByTestId('courseCardDuration');
     expect(title).toHaveTextContent('20:37 hours');
   });
@@ -80,7 +79,7 @@ describe('Course card tests', () => {
           {...mockedCourseCard}
         />
       </BrowserRouter>
-                                   </Provider>);
+    </Provider>);
     const title = getByTestId('courseCardCreationDate');
     expect(title).toHaveTextContent('Created: 09.11.2021');
   });
@@ -93,7 +92,7 @@ describe('Course card tests', () => {
           {...mockedCourseCard}
         />
       </BrowserRouter>
-                                   </Provider>);
+    </Provider>);
     const title = getByTestId('courseCardAuthors');
     expect(title).toHaveTextContent('Author:');
   });
