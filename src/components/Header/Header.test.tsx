@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import * as React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -20,7 +20,9 @@ describe('Header tests', () => {
   let store;
   it('should render Logo', () => {
     store = mockedStore(initialStoreState);
-    const { getByText, getByTestId } = render(<Provider store={store}><BrowserRouter><Header /></BrowserRouter></Provider>);
+    const { getByText, getByTestId } = render(
+      <Provider store={store}><BrowserRouter><Header /></BrowserRouter></Provider>,
+    );
     const logoElem = getByText('Logo');
     const nameElem = getByTestId('username');
     expect(logoElem).toBeVisible();

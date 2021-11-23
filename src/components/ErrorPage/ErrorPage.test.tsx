@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import * as React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -20,7 +20,9 @@ describe('Error page test', () => {
   let store;
   it('should render Logo', () => {
     store = mockedStore(initialStoreState);
-    const { getByTestId } = render(<Provider store={store}><BrowserRouter><ErrorPage /></BrowserRouter></Provider>);
+    const { getByTestId } = render(
+      <Provider store={store}><BrowserRouter><ErrorPage /></BrowserRouter></Provider>,
+    );
     const nameElem = getByTestId('errorPage');
     expect(nameElem).toBeDefined();
   });

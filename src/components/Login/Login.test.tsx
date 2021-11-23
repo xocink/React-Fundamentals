@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import * as React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -20,7 +20,9 @@ describe('Login page test', () => {
   let store;
   it('Should render login page and login and password block', () => {
     store = mockedStore(initialStoreState);
-    const { getByTestId } = render(<Provider store={store}><BrowserRouter><Login /></BrowserRouter></Provider>);
+    const { getByTestId } = render(
+      <Provider store={store}><BrowserRouter><Login /></BrowserRouter></Provider>,
+    );
     const nameElem = getByTestId('LoginPage');
     const loginBlock = getByTestId('loginEmail');
     const passwordBlock = getByTestId('loginPassword');
