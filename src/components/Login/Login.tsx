@@ -9,7 +9,7 @@ import { emailReg, passwordReg } from '../helpers/consts';
 import './Login.scss';
 import { loginUserAction, TrackUserAction } from '../../store/user/actionCreators';
 
-const Login : React.FC = (): JSX.Element => {
+const Login = (): JSX.Element => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginResponse, setLoginResponse] = useState<ILoginResponse>();
@@ -67,15 +67,15 @@ const Login : React.FC = (): JSX.Element => {
   };
 
   return (
-    <div className="login">
+    <div data-testid="LoginPage" className="login">
       <h3 className="login__title">Login</h3>
       <form onSubmit={handleSubmit} className="login__form">
-        <div className="login__email">
+        <div data-testid="loginEmail" className="login__email">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="email">Email</label>
           <SearchInput value={email} type="text" id="email" onChangeAction={handleEmailChange} />
         </div>
-        <div className="login__password">
+        <div data-testid="loginPassword" className="login__password">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="password">Password</label>
           <SearchInput value={password} type="text" id="password" onChangeAction={handlePasswordChange} />

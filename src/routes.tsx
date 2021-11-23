@@ -6,45 +6,49 @@
 // import ErrorPage from "./components/ErrorPage/ErrorPage";
 // import React from "react";
 //
-// const ROUTES : IRoutes[] = [{
+// export interface IRoutes {
+//   path: string,
+//   component: React.FC
+//   exact: boolean
+// }
+//
+// export const ROUTES: IRoutes[] = [
+//   {
 //   path: '/login',
-//   component: <Login />,
+//   component: <Login / >,
 //   exact: true,
 // },
 //   {
 //     path: '/registration',
-//     component: <Registration />,
+//     component: <Registration / >,
 //     exact: true,
 //   },
 //   {
 //     path: '/courses',
-//     component: <Courses />,
+//     component: <Courses / >,
 //     exact: true,
 //   },
 //   {
 //     path: '/courses/add',
-//     component: <CreateForm />,
+//     component: <CreateForm / >,
 //     exact: true,
 //   },
 //   {
 //     path: '/courses/add/:id',
-//     component: <CourseInfo />,
+//     component: <CourseInfo / >,
 //     exact: true,
 //   },
 //   {
 //     path: '/courses/update/:id',
-//     component: <CreateForm />,
+//     component: <CreateForm / >,
 //     exact: true,
 //   },
 //   {
 //     path: '/404',
-//     component: <ErrorPage />,
+//     component: <ErrorPage / >,
 //     exact: true,
 //   },
 // ];
-// interface IRoutes {
-//   path : string,
-//   component : React.FC
-//   exact : boolean
-// }
+//
+
 export default {};

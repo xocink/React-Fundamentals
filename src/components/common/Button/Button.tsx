@@ -8,7 +8,7 @@ const Button = ({
 } : IBtnProps) : JSX.Element => {
   const btnClasses = classNames(styles.btn, btnClassName);
   return (
-    <button type={isSubmit ? 'submit' : 'button'} onClick={action} className={btnClasses}>{btnText}</button>
+    <button data-testid="btnElement" type={isSubmit ? 'submit' : 'button'} onClick={action} className={btnClasses}>{btnText}</button>
   );
 };
 

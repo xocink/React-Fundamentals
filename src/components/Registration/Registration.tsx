@@ -72,20 +72,20 @@ const Registration = (): JSX.Element => {
   };
 
   return (
-    <div className="registration">
+    <div data-testid="registrationPage" className="registration">
       <h3 className="registration__title">Registration</h3>
       <form onSubmit={handleSubmit} className="registration__form">
-        <div className="registration__name">
+        <div data-testid="registrationName" className="registration__name">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="name">Name</label>
           <SearchInput value={name} type="text" id="name" onChangeAction={handleNameChange} />
         </div>
-        <div className="registration__email">
+        <div data-testid="registrationEmail" className="registration__email">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="email">Email</label>
           <SearchInput value={email} type="text" id="email" onChangeAction={handleEmailChange} />
         </div>
-        <div className="registration__password">
+        <div data-testid="registrationPassword" className="registration__password">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="password">Password</label>
           <SearchInput value={password} type="text" id="password" onChangeAction={handlePasswordChange} />

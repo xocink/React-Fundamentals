@@ -4,11 +4,11 @@ import { render, screen } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { IStore } from '../../../../../store/interfaces';
-import { userInitialState } from '../../../../../store/user/initialState';
-import { authorsInitialState } from '../../../../../store/authors/initialState';
-import { coursesInitialState } from '../../../../../store/courses/initialState';
-import CourseCard from '../CourseCard';
+import { IStore } from '../../../../store/interfaces';
+import { userInitialState } from '../../../../store/user/initialState';
+import { authorsInitialState } from '../../../../store/authors/initialState';
+import { coursesInitialState } from '../../../../store/courses/initialState';
+import CourseCard from './CourseCard';
 
 describe('Course card tests', () => {
   const initialStoreState: IStore = {
@@ -35,66 +35,66 @@ describe('Course card tests', () => {
 
   it('should render right title', () => {
     store = mockedStore(initialStoreState);
-    render(<Provider store={store}>
+    const { getByTestId } = render(<Provider store={store}>
       <BrowserRouter>
         <CourseCard
           {...mockedCourseCard}
         />
       </BrowserRouter>
-    </Provider>);
-    const title = screen.getByTestId('courseCardTitle');
+                                   </Provider>);
+    const title = getByTestId('courseCardTitle');
     expect(title).toHaveTextContent('qwqw');
   });
 
   it('should render right description', () => {
     store = mockedStore(initialStoreState);
-    render(<Provider store={store}>
+    const { getByTestId } = render(<Provider store={store}>
       <BrowserRouter>
         <CourseCard
           {...mockedCourseCard}
         />
       </BrowserRouter>
-    </Provider>);
-    const title = screen.getByTestId('courseCardDescription');
+                                   </Provider>);
+    const title = getByTestId('courseCardDescription');
     expect(title).toHaveTextContent('234');
   });
 
   it('should render right duration', () => {
     store = mockedStore(initialStoreState);
-    render(<Provider store={store}>
+    const { getByTestId } = render(<Provider store={store}>
       <BrowserRouter>
         <CourseCard
           {...mockedCourseCard}
         />
       </BrowserRouter>
-    </Provider>);
-    const title = screen.getByTestId('courseCardDuration');
+                                   </Provider>);
+    const title = getByTestId('courseCardDuration');
     expect(title).toHaveTextContent('20:37 hours');
   });
 
   it('should render right creation date', () => {
     store = mockedStore(initialStoreState);
-    render(<Provider store={store}>
+    const { getByTestId } = render(<Provider store={store}>
       <BrowserRouter>
         <CourseCard
           {...mockedCourseCard}
         />
       </BrowserRouter>
-    </Provider>);
-    const title = screen.getByTestId('courseCardCreationDate');
+                                   </Provider>);
+    const title = getByTestId('courseCardCreationDate');
     expect(title).toHaveTextContent('Created: 09.11.2021');
   });
 
   it('should render Logo', () => {
     store = mockedStore(initialStoreState);
-    render(<Provider store={store}>
+    const { getByTestId } = render(<Provider store={store}>
       <BrowserRouter>
         <CourseCard
           {...mockedCourseCard}
         />
       </BrowserRouter>
-    </Provider>);
-    const title = screen.getByTestId('courseCardAuthors');
+                                   </Provider>);
+    const title = getByTestId('courseCardAuthors');
     expect(title).toHaveTextContent('Author:');
   });
 });
