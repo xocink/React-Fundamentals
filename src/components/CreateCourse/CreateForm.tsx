@@ -67,7 +67,7 @@ const CreateForm = (): JSX.Element => {
 
   const deleteAuthor = (author: IAuthorModel): void => {
     const tempArr = courseAuthors.slice();
-    setCourseAuthors(() => [...tempArr.filter((item) => item.name !== author.name)]);
+    setCourseAuthors([...tempArr.filter((item) => item.name !== author.name)]);
   };
 
   const handleTitleChange = (newTitle: string) => {
@@ -93,7 +93,7 @@ const CreateForm = (): JSX.Element => {
       return;
     }
     tempArr.push(author);
-    setCourseAuthors(() => [...tempArr]);
+    setCourseAuthors([...tempArr]);
   };
 
   const handleCreateCourseBtn = (e: FormEvent<HTMLFormElement>) => {
@@ -129,7 +129,7 @@ const CreateForm = (): JSX.Element => {
   };
 
   return (
-    <div className="create-course__wrapper">
+    <div data-testid="courseForm" className="create-course__wrapper">
       <form className="create-course" onSubmit={handleCreateCourseBtn}>
         <div className="create-course__upper">
           <div className="create-course__title-block">

@@ -46,6 +46,7 @@ export const TrackUserAction = (
       payload,
     });
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e);
   }
 };

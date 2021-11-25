@@ -27,7 +27,6 @@ const Login = (): JSX.Element => {
   });
 
   const handleEmailChange = (value: string, ref: HTMLInputElement | undefined) => {
-    console.log(emailReg.test(value));
     if (emailReg.test(value) || ref?.value === '') {
       setEmail(value);
       ref?.classList.remove('error');
@@ -68,15 +67,15 @@ const Login = (): JSX.Element => {
   };
 
   return (
-    <div className="login">
+    <div data-testid="LoginPage" className="login">
       <h3 className="login__title">Login</h3>
       <form onSubmit={handleSubmit} className="login__form">
-        <div className="login__email">
+        <div data-testid="loginEmail" className="login__email">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="email">Email</label>
           <SearchInput value={email} type="text" id="email" onChangeAction={handleEmailChange} />
         </div>
-        <div className="login__password">
+        <div data-testid="loginPassword" className="login__password">
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="password">Password</label>
           <SearchInput value={password} type="text" id="password" onChangeAction={handlePasswordChange} />

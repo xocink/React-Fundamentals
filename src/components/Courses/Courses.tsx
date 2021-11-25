@@ -9,11 +9,8 @@ import { ICourseModel } from '../CreateCourse/components/interfaces/course-inter
 import { fetchCourses } from '../../store/courses/actionCreators';
 import { getCoursesSelector, getUserSelector } from '../../store/selectors/selectors';
 import { fetchAuthors } from '../../store/authors/actionCreators';
-import styles from './Courses.module.scss';
 import { AdminRole } from './consts';
-// interface ICoursesProps {
-//   courses: ICourseModel[]
-// }
+import styles from './Courses.module.scss';
 
 const Courses = (): JSX.Element => {
   const coursesList = useSelector(getCoursesSelector);
@@ -38,7 +35,7 @@ const Courses = (): JSX.Element => {
     setSearchQuery(query);
   };
   return (
-    <div className={styles.courses__wrapper}>
+    <div data-testid="courses" className={styles.courses__wrapper}>
       <div className={styles.courses__menu}>
         <div className={styles.search__wrapper}>
           <SearchInput value={searchQuery} type="text" onChangeAction={onQueryChange} />
@@ -46,7 +43,7 @@ const Courses = (): JSX.Element => {
         </div>
         { user.role === AdminRole ? (
           <Link to="courses/add">
-            <Button btnText="Add new course" />
+            <Button btnText="Add new course" btnClassName="createBtn" />
           </Link>
         ) : '' }
       </div>
